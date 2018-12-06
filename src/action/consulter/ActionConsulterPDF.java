@@ -8,56 +8,42 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.Vector;
-
 import com.qoppa.pdfWriter.PDFPrinterJob;
 
-import panel.Vue;
-
 public class ActionConsulterPDF implements ActionListener, Printable{
-
+	
+	/* ATTRIBUTS PRIVEES */
+	private panel.Vue vue;
+		//Page
 	private int m_CurrentPage;
 	private int m_CurrentPageStartRow;
 	private int m_CurrentPageEndRow;
+		//Constante
 	private final static int DEFAULT_COLUMN_WIDTH = 72;
 	private final static int CELL_MARGIN_X = 4;
 	private final static int CELL_MARGIN_Y = 4;
-	
+		//Vecteurs
 	private Vector m_Data;
 	private int m_ColumnWidths [];
 	private boolean m_DrawGrid;
 	
-	/* ATTRIBUTS PRIVEES */
-	private panel.Vue vue;
-	
 	/* CONSTRUCTEURS */
-	public ActionConsulterPDF(Vector data, int [] colWidths, boolean drawGrid)
-	{
+	public ActionConsulterPDF(Vector data, int [] colWidths, boolean drawGrid){
 		super();
 		m_Data = data;
 		m_ColumnWidths = colWidths;
 		m_DrawGrid = drawGrid;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		ActionConsulterPDF tablePrinter = new ActionConsulterPDF(initData (), null, true);
-        
-        PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
-        printerJob.setPrintable(tablePrinter);
-        
-        try
-        {
-            printerJob.print();
-        }
-        catch (PrinterException pe)
-        {
-            pe.printStackTrace();
-        }
-	}
+/* *************************************************************************************************************** */
+
+
+
+/* *************************************************************************************************************** */
+//Méthodes
+/* *************************************************************************************************************** */
 	
-	public static Vector initData ()
-	{
+	public static Vector initData (){
 		Vector data = new Vector ();
 		
 		// Initialize data
@@ -145,6 +131,32 @@ public class ActionConsulterPDF implements ActionListener, Printable{
 		m_CurrentPage = pageIndex;
 		
 		return Printable.PAGE_EXISTS;
+	}
+	
+/* *************************************************************************************************************** */
+
+
+
+/* *************************************************************************************************************** */
+//Action listener
+/* *************************************************************************************************************** */	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		ActionConsulterPDF tablePrinter = new ActionConsulterPDF(initData (), null, true);
+        
+        PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
+        printerJob.setPrintable(tablePrinter);
+        
+        try
+        {
+            printerJob.print();
+        }
+        catch (PrinterException pe)
+        {
+            pe.printStackTrace();
+        }
 	}
 
 }
