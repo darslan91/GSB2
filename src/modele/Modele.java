@@ -81,18 +81,17 @@ private static Connection connexion ;
 		String strMdp = "";
 		
 		try {
-		for (int i = 0; i < unMdp.length; i = i + 1){
-			strMdp = strMdp + unMdp[i];
-		}
-		st = connexion.createStatement();
-		rs = st.executeQuery(sql);
-		rs.next();
-		
-		if(strMdp.equals(rs.getString(1))){
-		/*	decrypterMdp(strMdp);*/
-			result = true;
-		}
-			
+			for (int i = 0; i < unMdp.length; i = i + 1){
+				strMdp = strMdp + unMdp[i];
+			}
+			st = connexion.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()){
+				if(strMdp.equals(rs.getString(1))){
+				/*	decrypterMdp(strMdp);*/
+					result = true;
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
