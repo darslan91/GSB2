@@ -20,7 +20,6 @@ public class Vue extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
 		/* DECLARATION */
 			//Panel
 		this.panelGlobal = new JPanel();
