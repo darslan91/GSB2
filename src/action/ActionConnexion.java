@@ -55,5 +55,4 @@ public class ActionConnexion implements ActionListener{
 		
 	}
 
-	}
 }
