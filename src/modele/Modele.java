@@ -85,7 +85,6 @@ public class Modele {
 				strMdp = strMdp + unMdp[i];
 			}
 			rs = st.executeQuery(sql);
-			System.out.println("test");
 			while (rs.next()){
 				if(strMdp.equals(rs.getString(1))){
 				/*	decrypterMdp(strMdp);*/

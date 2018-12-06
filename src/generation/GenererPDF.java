@@ -1,4 +1,4 @@
-package action.consulter;
+package generation;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,7 +12,7 @@ import java.util.Vector;
 
 import com.qoppa.pdfWriter.PDFPrinterJob;
 
-public class ActionConsulterPDF implements ActionListener, Printable{
+public class GenererPDF implements ActionListener, Printable{
 	
 	/* ATTRIBUTS PRIVEES */
 	private panel.Vue vue;
@@ -30,7 +30,7 @@ public class ActionConsulterPDF implements ActionListener, Printable{
 	private boolean m_DrawGrid;
 	
 	/* CONSTRUCTEURS */
-	public ActionConsulterPDF(Vector data, int [] colWidths, boolean drawGrid){
+	public GenererPDF(Vector data, int [] colWidths, boolean drawGrid){
 		super();
 		m_Data = data;
 		m_ColumnWidths = colWidths;
@@ -50,13 +50,15 @@ public class ActionConsulterPDF implements ActionListener, Printable{
 		
 		// Initialize data
 //		for (int row = 0; row < 100; ++row){
+			String test = new String();
+			test ="test";
 			Vector rowData = new Vector ();
 //			for (int col = 0; col < 5; ++col){	
-				rowData.addElement("test 1");
-				rowData.addElement("test 2");
+				rowData.addElement (test);
+				rowData.add("test");
 //				rowData.addElement("Test 2");
 //			}
-			data.addElement(rowData);
+			data.addElement (rowData);
 //		}
 
 		return data;
@@ -146,7 +148,7 @@ public class ActionConsulterPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		ActionConsulterPDF tablePrinter = new ActionConsulterPDF(initData (), null, true);
+		GenererPDF tablePrinter = new GenererPDF(initData (), null, true);
         
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);
