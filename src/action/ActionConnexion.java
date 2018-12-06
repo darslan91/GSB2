@@ -36,7 +36,7 @@ public class ActionConnexion implements ActionListener{
 		
 		//vérifie la connexion utilisateur
 
-		if(Modele.connexionSession(jpfMdp.getPassword(), jtfLogin.getText(), vue)){
+		if(Modele.connexionSession(jpfMdp.getPassword(), jtfLogin.getText())){
 			//vide la fenetre
 			this.vue.remove(this.vue.getContentPane());
 			//ajouter un panel

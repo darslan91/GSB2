@@ -31,8 +31,8 @@ private static Connection connexion ;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
-	//		connexion = DriverManager.getConnection("jdbc:mysql://localhost/bdd", "root", "");
+	//		connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
+			connexion = DriverManager.getConnection("jdbc:mysql://localhost/bdd", "root", "");
 			st = connexion.createStatement();
 		} 
 		catch (ClassNotFoundException erreur) {
@@ -73,20 +73,21 @@ private static Connection connexion ;
 	
 	
 	//connexionSession
-	public static boolean connexionSession(char [] unMdp ,String login, Vue uneVue){
+	public static boolean connexionSession(char [] unMdp ,String login){
 		boolean result = false;
 		connexionBD();
 		String sql;
-		sql = "Select mdp From visiteur Where login ='" + login + " ' ";
+		sql = "SELECT mdp FROM visiteur WHERE login ='" + login + "' ";
 		String strMdp = "";
 		
 		try {
 			for (int i = 0; i < unMdp.length; i = i + 1){
 				strMdp = strMdp + unMdp[i];
 			}
-			st = connexion.createStatement();
 			rs = st.executeQuery(sql);
+			System.out.println("test");
 			while (rs.next()){
+				
 				if(strMdp.equals(rs.getString(1))){
 				/*	decrypterMdp(strMdp);*/
 					result = true;
