@@ -24,7 +24,7 @@ public class Modele {
 	private static ResultSet rs;
 	private static PreparedStatement statement;
 	
-private static Connection connexion ;
+	private static Connection connexion ;
 	
 	//méthode publiques statiques connexion
 	public static void connexionBD() {
@@ -32,7 +32,7 @@ private static Connection connexion ;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 	//		connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
-			connexion = DriverManager.getConnection("jdbc:mysql://localhost/bdd", "root", "");
+			connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
 			st = connexion.createStatement();
 		} 
 		catch (ClassNotFoundException erreur) {
@@ -87,12 +87,12 @@ private static Connection connexion ;
 			rs = st.executeQuery(sql);
 			System.out.println("test");
 			while (rs.next()){
-				
 				if(strMdp.equals(rs.getString(1))){
 				/*	decrypterMdp(strMdp);*/
 					result = true;
 				}
 			}
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
