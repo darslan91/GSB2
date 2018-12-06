@@ -45,25 +45,14 @@ public class ActionConnexion implements ActionListener{
 			this.vue.setJMenuBar(new Menu(this.vue));
 			//rafraichit la page
 			this.vue.revalidate();
-	//	}
-	//	else {
+		}
+		else {
 			this.lblErreur.setText("Erreur Identifiant non valide");
 			this.lblErreur.setForeground(Color.WHITE);
 			this.lblErreur.setBackground(Color.RED);
 			this.lblErreur.setOpaque(true);
-	//	}
+		}
 		
-		
-		
-		/*
-		this.vue.remove(this.vue.getContentPane());
-		
-		this.vue.setContentPane(new Panel_Connecter(this.vue));
-		
-		this.vue.setJMenuBar(new Menu(this.vue));
-		
-		this.vue.revalidate();
-		*/
 	}
 
 }

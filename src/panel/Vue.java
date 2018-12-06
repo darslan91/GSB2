@@ -16,9 +16,10 @@ public class Vue extends JFrame{
 		
 		/*INFOS FENETRE */
 		this.setTitle("GSB - Applis Frais");
+		this.setSize(1100, 700);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1100, 700);
+		
 		
 		/* DECLARATION */
 			//Panel
