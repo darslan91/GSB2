@@ -10,9 +10,6 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.Vector;
 
-import com.qoppa.pdfWriter.PDFDocument;
-import com.qoppa.pdfWriter.PDFGraphics;
-import com.qoppa.pdfWriter.PDFPage;
 import com.qoppa.pdfWriter.PDFPrinterJob;
 
 public class GenererPDF implements ActionListener, Printable{
@@ -21,6 +18,8 @@ public class GenererPDF implements ActionListener, Printable{
 	private panel.Vue vue;
 		//Page
 	private int m_CurrentPage;
+	private int m_CurrentPageStartRow;
+	private int m_CurrentPageEndRow;
 		//Constante
 	private final static int DEFAULT_COLUMN_WIDTH = 72;
 	private final static int CELL_MARGIN_X = 4;
@@ -30,18 +29,12 @@ public class GenererPDF implements ActionListener, Printable{
 	private int m_ColumnWidths [];
 	private boolean m_DrawGrid;
 	
-		//info
-	private String id;
-	private String mois;
-	
 	/* CONSTRUCTEURS */
-	public GenererPDF(Vector data, int [] colWidths, boolean drawGrid, String id, String mois){
+	public GenererPDF(Vector data, int [] colWidths, boolean drawGrid){
 		super();
 		m_Data = data;
 		m_ColumnWidths = colWidths;
 		m_DrawGrid = drawGrid;
-		this.id = id;
-		this.mois = mois;
 	}
 
 /* *************************************************************************************************************** */
@@ -52,31 +45,93 @@ public class GenererPDF implements ActionListener, Printable{
 //Méthodes
 /* *************************************************************************************************************** */
 	
-	public static Vector initData(){
-		Vector data = new Vector ();		
+	public static Vector initData (){
+		Vector data = new Vector ();
+		
+		// Initialize data
+//		for (int row = 0; row < 100; ++row){
+			Vector rowData = new Vector ();
+//			for (int col = 0; col < 5; ++col){	
+				rowData.addElement("test 1");
+				rowData.addElement("test 2");
+//				rowData.addElement("Test 2");
+//			}
+			data.addElement(rowData);
+//		}
+
 		return data;
 	}
 	
-	public int print(Graphics g, PageFormat pf, int pageIndex){
-		try
-        {
-            // Create a document and a page in default Locale format
-            PDFDocument pdfDoc = new PDFDocument();
-            PDFPage newPage = pdfDoc.createPage(new PageFormat());
-            
-            // Draw to the page
-            Graphics2D g2d = newPage.createGraphics();
-            g2d.setFont (PDFGraphics.HELVETICA.deriveFont(24f));
-            g2d.drawString("Hello World", 100, 100);
-            
-            // Add the page to the document and save it
-            pdfDoc.addPage(newPage);
-            pdfDoc.saveDocument(""/*ici le nom*/);
-        }
-        catch (Throwable t)
-        {
-            t.printStackTrace();
-        }
+	public int print (Graphics g, PageFormat pf, int pageIndex)
+	{
+		int lineHeight = g.getFontMetrics().getHeight();
+		g.drawString("test de bite", 5, 10);
+		// Reset current pos
+		int currentRow = 0;
+		if (pageIndex == 0)
+		{
+			// Need to do this in case the instance of this class
+			// gets used multiple times to print a string
+			m_CurrentPage = 0;
+			m_CurrentPageStartRow = 0;
+		}
+		// Need to do this because Java PrinterJob can call this
+		// method multiple times for the same page;
+		else if (m_CurrentPage == pageIndex)
+		{
+			currentRow = m_CurrentPageStartRow;
+		}
+		else
+		{
+			currentRow = m_CurrentPageEndRow + 1;
+			m_CurrentPageStartRow = currentRow;
+		}
+		
+		// If we're out of lines, tell the PrinterJob we're done
+		if (currentRow >= m_Data.size())
+		{
+			return Printable.NO_SUCH_PAGE;
+		}
+
+		// Loop through lines until we fill the page
+		int currentY = (int)(pf.getImageableY() + lineHeight);
+		while (currentRow < m_Data.size() && 
+				currentY + lineHeight < pf.getImageableY() + pf.getImageableHeight())
+		{
+			// Draw the next line
+			int currentX = (int)pf.getImageableX();
+			Vector nextRow = (Vector)m_Data.elementAt (currentRow);
+			for (int col = 0; col < nextRow.size(); ++col)
+			{
+				String cellString = (String)nextRow.elementAt (col);
+				g.drawString (cellString, currentX + CELL_MARGIN_X, currentY + CELL_MARGIN_Y);
+				
+				int colWidth = DEFAULT_COLUMN_WIDTH;
+				if (m_ColumnWidths != null && m_ColumnWidths.length > col)
+				{
+					colWidth = m_ColumnWidths [col];
+				}
+				
+				// Draw grid if needed
+				if (m_DrawGrid)
+				{
+					g.drawRect (currentX, currentY - (lineHeight / 2), colWidth, lineHeight);
+				}
+				
+				// Advance x
+				currentX += colWidth;
+			}
+			
+			// Advance to the next line
+			++currentRow;
+			currentY += lineHeight;
+		}
+		
+		// Save the ned line and current page
+		// Again, we have to do this because of multiple calls for the same page.
+		m_CurrentPageEndRow = currentRow;
+		m_CurrentPage = pageIndex;
+		
 		return Printable.PAGE_EXISTS;
 	}
 	
@@ -91,7 +146,8 @@ public class GenererPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		GenererPDF tablePrinter = new GenererPDF(initData(), null, true, "a131", "201812");
+		GenererPDF tablePrinter = new GenererPDF(initData (), null, true);
+        
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);
         

@@ -65,7 +65,7 @@ public class ActionConsulterPDF implements ActionListener, Printable{
 	public int print (Graphics g, PageFormat pf, int pageIndex)
 	{
 		int lineHeight = g.getFontMetrics().getHeight();
-		
+		g.drawString("test de bite", 5, 10);
 		// Reset current pos
 		int currentRow = 0;
 		if (pageIndex == 0)
