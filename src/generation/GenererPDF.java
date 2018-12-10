@@ -10,6 +10,9 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.Vector;
 
+import com.qoppa.pdfWriter.PDFDocument;
+import com.qoppa.pdfWriter.PDFGraphics;
+import com.qoppa.pdfWriter.PDFPage;
 import com.qoppa.pdfWriter.PDFPrinterJob;
 
 public class GenererPDF implements ActionListener, Printable{
@@ -18,8 +21,6 @@ public class GenererPDF implements ActionListener, Printable{
 	private panel.Vue vue;
 		//Page
 	private int m_CurrentPage;
-	private int m_CurrentPageStartRow;
-	private int m_CurrentPageEndRow;
 		//Constante
 	private final static int DEFAULT_COLUMN_WIDTH = 72;
 	private final static int CELL_MARGIN_X = 4;
@@ -52,56 +53,30 @@ public class GenererPDF implements ActionListener, Printable{
 /* *************************************************************************************************************** */
 	
 	public static Vector initData(){
-		Vector data = new Vector ();
-//		String nom = ModeleGeneration.getNom(id);
-//		String prenom = ModeleGeneration.getPrenom(id);
-		// Initialize data
-//		for (int row = 0; row < 100; ++row){
-//			String test = new String();
-//			test ="test";
-//			Vector rowData = new Vector ();
-//			for (int col = 0; col < 5; ++col){	
-//				rowData.addElement (test);
-//				rowData.add("test");
-//				rowData.addElement("Test 2");
-//			}
-//			data.addElement (rowData);
-//		}
-			
-//		Vector rowData1 = new Vector();
-//		rowData1.add("Fiche de frais de " + nom + "  " + prenom);
-//		data.addElement(rowData1);
-		
-//		rowData2.add("");
-//		rowData1.add("Forfait Etape");
-//		rowData1.add("Nombre Kilometre");
-//		rowData1.add("Nuitée Hotel");
-//		rowData1.add("Reâs Restaurant");
-//		rowData1.add("Total");
-//		data.addElement(rowData1);
-		
-/*		Vector rowData3 = new Vector();
-		rowData3.add("");
-		rowData3.add(ModeleGeneration.getNbForfaisEtape(mois, id));
-		rowData3.add(ModeleGeneration.getNbKilometre(mois, id));
-		rowData3.add(ModeleGeneration.getNbNuite(mois, id));
-		rowData3.add(ModeleGeneration.getNbRepas(mois, id));
-		data.addElement(rowData3);
-		
-		Vector rowData4 = new Vector();
-		rowData4.add("Montant");
-		rowData4.add(ModeleGeneration.getMontantEtape(mois, id));
-		rowData4.add(ModeleGeneration.getTotalMontantKm(mois, id));
-		rowData4.add(ModeleGeneration.getMontantNuite(mois, id));
-		rowData4.add(ModeleGeneration.getMontantRepas(mois, id));
-		rowData4.add(ModeleGeneration.getMontantTotalHF(mois, id));*/
-		
+		Vector data = new Vector ();		
 		return data;
 	}
 	
 	public int print(Graphics g, PageFormat pf, int pageIndex){
-	
-		
+		try
+        {
+            // Create a document and a page in default Locale format
+            PDFDocument pdfDoc = new PDFDocument();
+            PDFPage newPage = pdfDoc.createPage(new PageFormat());
+            
+            // Draw to the page
+            Graphics2D g2d = newPage.createGraphics();
+            g2d.setFont (PDFGraphics.HELVETICA.deriveFont(24f));
+            g2d.drawString("Hello World", 100, 100);
+            
+            // Add the page to the document and save it
+            pdfDoc.addPage(newPage);
+            pdfDoc.saveDocument(""/*ici le nom*/);
+        }
+        catch (Throwable t)
+        {
+            t.printStackTrace();
+        }
 		return Printable.PAGE_EXISTS;
 	}
 	
@@ -116,8 +91,7 @@ public class GenererPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		GenererPDF tablePrinter = new GenererPDF(initData(), null, true, idParam, moisParam);
-        
+		GenererPDF tablePrinter = new GenererPDF(initData(), null, true, "a131", "201812");
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);
         
