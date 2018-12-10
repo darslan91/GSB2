@@ -29,12 +29,18 @@ public class GenererPDF implements ActionListener, Printable{
 	private int m_ColumnWidths [];
 	private boolean m_DrawGrid;
 	
+		//info
+	private String id;
+	private String mois;
+	
 	/* CONSTRUCTEURS */
-	public GenererPDF(Vector data, int [] colWidths, boolean drawGrid){
+	public GenererPDF(Vector data, int [] colWidths, boolean drawGrid, String id, String mois){
 		super();
 		m_Data = data;
 		m_ColumnWidths = colWidths;
 		m_DrawGrid = drawGrid;
+		this.id = id;
+		this.mois = mois;
 	}
 
 /* *************************************************************************************************************** */
@@ -45,10 +51,10 @@ public class GenererPDF implements ActionListener, Printable{
 //Méthodes
 /* *************************************************************************************************************** */
 	
-	public static Vector initData(String id, String mois){
+	public static Vector initData(){
 		Vector data = new Vector ();
-		String nom = ModeleGeneration.getNom(id);
-		String prenom = ModeleGeneration.getPrenom(id);
+//		String nom = ModeleGeneration.getNom(id);
+//		String prenom = ModeleGeneration.getPrenom(id);
 		// Initialize data
 //		for (int row = 0; row < 100; ++row){
 //			String test = new String();
@@ -62,107 +68,39 @@ public class GenererPDF implements ActionListener, Printable{
 //			data.addElement (rowData);
 //		}
 			
-		Vector rowData1 = new Vector();
-		rowData1.add("                            Fiche de frais de " + nom + "  " + prenom + "                            ");
-		data.addElement(rowData1);
+//		Vector rowData1 = new Vector();
+//		rowData1.add("Fiche de frais de " + nom + "  " + prenom);
+//		data.addElement(rowData1);
 		
-	/*	Vector rowData2 = new Vector();
-		rowData2.addElement("");
-		rowData2.addElement("Forfait Etape");
-		rowData2.addElement("Nombre Kilometre");
-		rowData2.addElement("Nuitée Hotel");
-		rowData2.addElement("Reâs Restaurant");
-		rowData2.addElement("Total");
-		data.addElement(rowData2);
+//		rowData2.add("");
+//		rowData1.add("Forfait Etape");
+//		rowData1.add("Nombre Kilometre");
+//		rowData1.add("Nuitée Hotel");
+//		rowData1.add("Reâs Restaurant");
+//		rowData1.add("Total");
+//		data.addElement(rowData1);
 		
-		Vector rowData3 = new Vector();
-		rowData3.addElement("");
-		rowData3.addElement(ModeleGeneration.getNbForfaisEtape(mois, id));
-		rowData3.addElement(ModeleGeneration.getNbKilometre(mois, id));
-		rowData3.addElement(ModeleGeneration.getNbNuite(mois, id));
-		rowData3.addElement(ModeleGeneration.getNbRepas(mois, id));
+/*		Vector rowData3 = new Vector();
+		rowData3.add("");
+		rowData3.add(ModeleGeneration.getNbForfaisEtape(mois, id));
+		rowData3.add(ModeleGeneration.getNbKilometre(mois, id));
+		rowData3.add(ModeleGeneration.getNbNuite(mois, id));
+		rowData3.add(ModeleGeneration.getNbRepas(mois, id));
 		data.addElement(rowData3);
 		
 		Vector rowData4 = new Vector();
-		rowData4.addElement("Montant");
-		rowData4.addElement(ModeleGeneration.getMontantEtape(mois, id));
-		rowData4.addElement(ModeleGeneration.getTotalMontantKm(mois, id));
-		rowData4.addElement(ModeleGeneration.getMontantNuite(mois, id));
-		rowData4.addElement(ModeleGeneration.getMontantRepas(mois, id));
-		rowData4.addElement(ModeleGeneration.getMontantTotalHF(mois, id));*/
+		rowData4.add("Montant");
+		rowData4.add(ModeleGeneration.getMontantEtape(mois, id));
+		rowData4.add(ModeleGeneration.getTotalMontantKm(mois, id));
+		rowData4.add(ModeleGeneration.getMontantNuite(mois, id));
+		rowData4.add(ModeleGeneration.getMontantRepas(mois, id));
+		rowData4.add(ModeleGeneration.getMontantTotalHF(mois, id));*/
 		
 		return data;
 	}
 	
-	public int print (Graphics g, PageFormat pf, int pageIndex)
-	{
-		int lineHeight = g.getFontMetrics().getHeight();
-		
-		// Reset current pos
-		int currentRow = 0;
-		if (pageIndex == 0)
-		{
-			// Need to do this in case the instance of this class
-			// gets used multiple times to print a string
-			m_CurrentPage = 0;
-			m_CurrentPageStartRow = 0;
-		}
-		// Need to do this because Java PrinterJob can call this
-		// method multiple times for the same page;
-		else if (m_CurrentPage == pageIndex)
-		{
-			currentRow = m_CurrentPageStartRow;
-		}
-		else
-		{
-			currentRow = m_CurrentPageEndRow + 1;
-			m_CurrentPageStartRow = currentRow;
-		}
-		
-		// If we're out of lines, tell the PrinterJob we're done
-		if (currentRow >= m_Data.size())
-		{
-			return Printable.NO_SUCH_PAGE;
-		}
-
-		// Loop through lines until we fill the page
-		int currentY = (int)(pf.getImageableY() + lineHeight);
-		while (currentRow < m_Data.size() && 
-				currentY + lineHeight < pf.getImageableY() + pf.getImageableHeight())
-		{
-			// Draw the next line
-			int currentX = (int)pf.getImageableX();
-			Vector nextRow = (Vector)m_Data.elementAt (currentRow);
-			for (int col = 0; col < nextRow.size(); ++col)
-			{
-				String cellString = (String)nextRow.elementAt (col);
-				g.drawString (cellString, currentX + CELL_MARGIN_X, currentY + CELL_MARGIN_Y);
-				
-				int colWidth = DEFAULT_COLUMN_WIDTH;
-				if (m_ColumnWidths != null && m_ColumnWidths.length > col)
-				{
-					colWidth = m_ColumnWidths [col];
-				}
-				
-				// Draw grid if needed
-				if (m_DrawGrid)
-				{
-					g.drawRect (currentX, currentY - (lineHeight / 2), colWidth, lineHeight);
-				}
-				
-				// Advance x
-				currentX += colWidth;
-			}
-			
-			// Advance to the next line
-			++currentRow;
-			currentY += lineHeight;
-		}
-		
-		// Save the ned line and current page
-		// Again, we have to do this because of multiple calls for the same page.
-		m_CurrentPageEndRow = currentRow;
-		m_CurrentPage = pageIndex;
+	public int print(Graphics g, PageFormat pf, int pageIndex){
+	
 		
 		return Printable.PAGE_EXISTS;
 	}
@@ -178,7 +116,7 @@ public class GenererPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		GenererPDF tablePrinter = new GenererPDF(initData("a131", "201812"), null, true);
+		GenererPDF tablePrinter = new GenererPDF(initData(), null, true, idParam, moisParam);
         
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);
