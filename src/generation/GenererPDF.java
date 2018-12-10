@@ -45,22 +45,52 @@ public class GenererPDF implements ActionListener, Printable{
 //Méthodes
 /* *************************************************************************************************************** */
 	
-	public static Vector initData (){
+	public static Vector initData(String id, String mois){
 		Vector data = new Vector ();
-		
+		String nom = ModeleGeneration.getNom(id);
+		String prenom = ModeleGeneration.getPrenom(id);
 		// Initialize data
 //		for (int row = 0; row < 100; ++row){
-			String test = new String();
-			test ="test";
-			Vector rowData = new Vector ();
+//			String test = new String();
+//			test ="test";
+//			Vector rowData = new Vector ();
 //			for (int col = 0; col < 5; ++col){	
-				rowData.addElement (test);
-				rowData.add("test");
+//				rowData.addElement (test);
+//				rowData.add("test");
 //				rowData.addElement("Test 2");
 //			}
-			data.addElement (rowData);
+//			data.addElement (rowData);
 //		}
-
+			
+		Vector rowData1 = new Vector();
+		rowData1.add("                            Fiche de frais de " + nom + "  " + prenom + "                            ");
+		data.addElement(rowData1);
+		
+	/*	Vector rowData2 = new Vector();
+		rowData2.addElement("");
+		rowData2.addElement("Forfait Etape");
+		rowData2.addElement("Nombre Kilometre");
+		rowData2.addElement("Nuitée Hotel");
+		rowData2.addElement("Reâs Restaurant");
+		rowData2.addElement("Total");
+		data.addElement(rowData2);
+		
+		Vector rowData3 = new Vector();
+		rowData3.addElement("");
+		rowData3.addElement(ModeleGeneration.getNbForfaisEtape(mois, id));
+		rowData3.addElement(ModeleGeneration.getNbKilometre(mois, id));
+		rowData3.addElement(ModeleGeneration.getNbNuite(mois, id));
+		rowData3.addElement(ModeleGeneration.getNbRepas(mois, id));
+		data.addElement(rowData3);
+		
+		Vector rowData4 = new Vector();
+		rowData4.addElement("Montant");
+		rowData4.addElement(ModeleGeneration.getMontantEtape(mois, id));
+		rowData4.addElement(ModeleGeneration.getTotalMontantKm(mois, id));
+		rowData4.addElement(ModeleGeneration.getMontantNuite(mois, id));
+		rowData4.addElement(ModeleGeneration.getMontantRepas(mois, id));
+		rowData4.addElement(ModeleGeneration.getMontantTotalHF(mois, id));*/
+		
 		return data;
 	}
 	
@@ -148,7 +178,7 @@ public class GenererPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		GenererPDF tablePrinter = new GenererPDF(initData (), null, true);
+		GenererPDF tablePrinter = new GenererPDF(initData("a131", "201812"), null, true);
         
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);
