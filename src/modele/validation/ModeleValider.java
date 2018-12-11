@@ -35,9 +35,9 @@ public class ModeleValider {
 	public static void connexionBD() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		//	connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
+			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
 		//	connexion = DriverManager.getConnection("jdbc:mysql://172.16.252.10/slam2", "slam2", "GiPo94h");
-			connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
+		//	connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
 			st = connexion.createStatement();
 		} 
 		catch (ClassNotFoundException erreur) {
