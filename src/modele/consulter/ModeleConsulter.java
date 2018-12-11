@@ -18,13 +18,28 @@ public class ModeleConsulter {
 	//private static PreparedStatement statement;
 	private static Connection connexion ;
 	
-	//méthode publiques statiques connexion
+	
+	
+/*	--------------------------------------------------------------------------------------------------------
+/										CONNEXION A LA BASE DE DONNEES 
+/   --------------------------------------------------------------------------------------------------------
+/		Permet la connexion à la base de donnees. Plusieur infos sont à renseigne :
+/			- adresse serveur, (172.16.203.100)
+/			- nom de la BDD, (2018foulley)
+/			- utilisateur et  (tfoulley)
+/			- mot de passe.	 (123456)
+ */
 	public static void connexionBD() {
 		
+		//Gestion des exceptions possibless 
 		try {
+			//Chargment du driver
 			Class.forName("com.mysql.jdbc.Driver");
+			
+			//Connexion à la BDD
 			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
 		//	connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
+			
 			st = connexion.createStatement();
 		} 
 		catch (ClassNotFoundException erreur) {
@@ -36,7 +51,11 @@ public class ModeleConsulter {
 	}
 	
 	
-	//deconnexion
+/*  ---------------------------------------------------------------------------------------------------------
+/										DECONNEXION DE LA BASE DE DONNEES
+/  ----------------------------------------------------------------------------------------------------------
+/ 		Deconnexion a la base de donnees pour permettre de ne pas surcharger le serveur
+ */
 	public static void deconnexionBD() {
 		try {
 			connexion.close();
@@ -253,32 +272,64 @@ public class ModeleConsulter {
 		
 	}
 	
+	
 /* -------------------------------------------------------------------------------------
-/					RECUPERATION DES ELEMENTS DE LA FICHE FRAIS
+/                            RECUPERATION DE L'ID
 /  -------------------------------------------------------------------------------------
-/ 	Récupérer les informations de la fiche pour ce visiteur.
-/ 	Tables utilisés : - ligne frais forfaits
-/					  - ligne frais hors forfaits
+/   On vas pouvoir l'id du visiteur grâce au nom et au prenom, récuperer par le tableau
  */
-	public static ArrayList<LigneFraisForfait> getLesinfosFichesFraisForfait(){
-		ArrayList<LigneFraisForfait> lesInfosFichesFraisForfait = new ArrayList<LigneFraisForfait>();
-		connexionBD();
+	public static String getId(Object nom, Object prenom){
+		String id = "";
 		
+		try{
+			String req = "SELECT id"
+					+ "FROM visiteur"
+					+ "WHERE nom = '" + nom +"'"
+					+ "AND prenom = '" + prenom + "'";
+			rs = st.executeQuery(req);
+			rs.next();
+			
+			id = rs.getString("id");
+		}
+		catch(SQLException erreur){
+			//Pas le bon ID, problème dans l'exécution de la requête
+			System.out.println("Erreur dans l'exécution de la requête " + erreur);
+		}
 		
-		
-		
-		
-		
-		
-		
-		return null;
+		return id ;
+				
 	}
 	
 	
+/* ----------------------------------------------------------------------------------------
+/							RECUPERER LE MONTANT VALIDER
+/  ----------------------------------------------------------------------------------------	
+/   Cette méthode retourne le montant valider pour une fiche qui appartient a cet id et
+/   a ce mois passer en paramètre
+ */
+	public static float getMontantValider(Object mois, String id){
+		float monMontantValide = 0;
+		 
+		try{
+			String req = "SELECT montantValider"
+					+ "FROM fichefrais"
+					+ "WHERE idVisiteur = '" + id +"'"
+					+ "AND mois = '" + mois + "'";
+			rs = st.executeQuery(req);
+			rs.next();
+			
+			monMontantValide = rs.getFloat("montantValide");
+		}
+		catch(SQLException erreur){
+			//Pas le bon montantValide, problème dans l'exécution de la requête
+			System.out.println("Erreur dans l'exécution de la requête " + erreur);
+		}
+		
+		return monMontantValide;
+	}
 	
 	
-	
-	
+
 	
 	
 	

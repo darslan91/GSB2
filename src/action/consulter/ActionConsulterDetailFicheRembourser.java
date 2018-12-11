@@ -9,6 +9,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import panel.Vue;
+import panel.Vue_Detail;
+import panel.consulter.Panel_Details_Fiche_Rembourser;
+import panel.consulter.Panel_Fiche_En_Cours_De_Validation;
 import modele.consulter.ModeleConsulter;
 import classes.FicheFrais;
 import controleurs.Menu;
@@ -40,10 +43,8 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		
 //		Vue uneVue = new Vue();	
 		//System.out.println(this.ligne);
-				
+		//String []title = {"Nom", "Prénom", "Mois", "Montant validé", "Date modification", "Nombre de Justificatif"};
 		
-		
-		String []title = {"Nom", "Prénom", "Mois", "Montant validé", "Date modification", "Nombre de Justificatif"};
 		data = new Object[lesFichesFraisRembourser.size()][6];
 		for(FicheFrais uneFiche : lesFichesFraisRembourser){
 			data[this.i][0] = uneFiche.getNom();
@@ -53,21 +54,41 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 			data[this.i][4] = uneFiche.getDateModif();
 			data[this.i][5] = uneFiche.getNbJustificatifs();
 			this.i = this.i+1;
+			/*String id = ModeleConsulter.getId(data[this.i][0] , data[this.i][1] );
+			float montant = ModeleConsulter.getMontantValider(data[this.i][2], id);
+			Object mois = data[this.i][2];*/
 		}
 		
-		table = new JTable(data, title);
+		//RECUPERATION DES VALEURS
+		Object nom = data[this.i][0];
+		Object prenom = data[this.i][1];
+		Object mois = data[this.i][2];
 		
+		
+		/*table = new JTable(data, title);
 		//Nom
 		System.out.println(data[this.ligne][0]);
-		
 		//Prénom
 		System.out.println(data[this.ligne][1]);
-		
 		//Mois
 		System.out.println(data[this.ligne][2]);
-		
 		//Espace
-		System.out.println("");
+		System.out.println("");*/
+		
+		//Recuperation de l'id du visiteur grace a son nom et prenom (Object et Object)
+//		String id = ModeleConsulter.getId(data[this.i][0] , data[this.i][1] );
+		
+		//Recuperation simplement du montant valider (Object et String)
+//		float montant = ModeleConsulter.getMontantValider(data[this.i][2], id);
+		
+		//Recuperation du mois à partir du tableau
+//		Object mois = data[this.i][2];
+		
+		this.vue.remove(this.vue.getContentPane());
+		this.vue.setContentPane(new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom))));
+		this.vue.setJMenuBar(new Menu(this.vue));
+		this.vue.revalidate();	
+		
 		
 		
 	}
