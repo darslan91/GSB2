@@ -57,7 +57,10 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 			/*String id = ModeleConsulter.getId(data[this.i][0] , data[this.i][1] );
 			float montant = ModeleConsulter.getMontantValider(data[this.i][2], id);
 			Object mois = data[this.i][2];*/
+			
+
 		}
+		
 		
 		//RECUPERATION DES VALEURS
 		Object nom = data[this.i][0];
