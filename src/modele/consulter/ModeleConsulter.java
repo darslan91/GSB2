@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.Date;
 
 import classes.FicheFrais;
+import classes.LigneFraisForfait;
 import panel.Vue;
 
 
@@ -106,8 +107,11 @@ public class ModeleConsulter {
 	
 	
 /* ******************************************************************************************************** */
-	// Récupération des fiche de frais à l'état valider 'VA'. Cette méthode retourne une LISTE
-/* ******************************************************************************************************** */	
+	// Récupération des fiche de frais à l'état "valider" 'VA'. Cette méthode retourne une LISTE
+/* ********************************************************************************************************
+/ Cette méthode récupère les fiches de frais à l'état valider et fait l'insertion dans la liste lesFichesFraisValider.
+*/
+
 	public static ArrayList<FicheFrais> getLesFichesFraisValider(){
 		ArrayList<FicheFrais> lesFichesFraisValider = new ArrayList<FicheFrais>();
 		//connexioin a la base de données
@@ -154,7 +158,7 @@ public class ModeleConsulter {
 	}
 	
 /* ******************************************************************************************************** */
-	// Récupération des fiche de frais à l'état rembourser 'RB'. Cette méthode retourne une LISTE
+	// Récupération des fiche de frais à l'état "rembourser" 'RB'. Cette méthode retourne une LISTE
 /* ******************************************************************************************************** */	
 	public static ArrayList<FicheFrais> getLesFichesFraisRembourser(){
 		ArrayList<FicheFrais> lesFichesFraisRembourser = new ArrayList<FicheFrais>();
@@ -202,7 +206,7 @@ public class ModeleConsulter {
 	}
 	
 /* *************************************************************************************************************** */
-	// Récupération des fiche de frais à l'état "fiche crée, saisir en cours" 'CR'. Cette méthode retourne une LISTE
+	// Récupération des fiche de frais à l'état "fiche crée, saisir en cours" 'CR'. Cette méthode retourne une LISTE.
 /* *****************************************************************************************************************/	
 	public static ArrayList<FicheFrais> getLesFichesFraisCoursValidation(){
 		ArrayList<FicheFrais> lesFichesFraisCoursValidation = new ArrayList<FicheFrais>();
@@ -249,9 +253,26 @@ public class ModeleConsulter {
 		
 	}
 	
-/* *************************************************************************************************************** */
-	// Récupération
-/* *****************************************************************************************************************/
+/* -------------------------------------------------------------------------------------
+/					RECUPERATION DES ELEMENTS DE LA FICHE FRAIS
+/  -------------------------------------------------------------------------------------
+/ 	Récupérer les informations de la fiche pour ce visiteur.
+/ 	Tables utilisés : - ligne frais forfaits
+/					  - ligne frais hors forfaits
+ */
+	public static ArrayList<LigneFraisForfait> getLesinfosFichesFraisForfait(){
+		ArrayList<LigneFraisForfait> lesInfosFichesFraisForfait = new ArrayList<LigneFraisForfait>();
+		connexionBD();
+		
+		
+		
+		
+		
+		
+		
+		
+		return null;
+	}
 	
 	
 	

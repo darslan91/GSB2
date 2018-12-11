@@ -65,5 +65,10 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		
 		//Mois
 		System.out.println(data[this.ligne][2]);
+		
+		//Espace
+		System.out.println("");
+		
+		
 	}
 }

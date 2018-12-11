@@ -127,7 +127,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 
 
 	public void focusGained(FocusEvent arg0) {
-		// TODO Auto-generated method stub
+		// TODO Auto-genera ted method stub
 		int val = this.table.getSelectedRow();
 	//	System.out.println(val);
 		this.revalidate();
@@ -140,6 +140,6 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		// TODO Auto-generated method stub
 	}
 	
-		}
+}
 
 
