@@ -9,7 +9,6 @@ public class Controleur {
 		// TODO Auto-generated method stub
 		
 		Vue uneVue = new Vue();
-		
 	}
 
 }

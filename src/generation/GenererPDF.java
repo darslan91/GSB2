@@ -8,6 +8,8 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import com.qoppa.pdfWriter.PDFPrinterJob;
@@ -50,7 +52,7 @@ public class GenererPDF implements ActionListener, Printable{
 //Méthodes
 /* *************************************************************************************************************** */
 	
-	public static Vector initData (){
+	public static Vector initData(String id, String mois){
 		Vector data = new Vector ();
 		Vector rowData = new Vector ();
 		
@@ -61,12 +63,49 @@ public class GenererPDF implements ActionListener, Printable{
 		data.addElement(rowData);
 		
 		Vector rowData2 = new Vector ();
-		rowData2.add("Test 3");
+		String nbForfaitEtp = ModeleGeneration.getNbForfaisEtape(mois, id);
+		String nbKiloM = ModeleGeneration.getNbKilometre(mois, id);
+		String nbNuite = ModeleGeneration.getNbNuite(mois, id);
+		String nbRepas = ModeleGeneration.getNbRepas(mois, id);
+		rowData2.add(nbForfaitEtp);
+		rowData2.add(nbKiloM);
+		rowData2.add(nbNuite);
+		rowData2.add(nbRepas);
 		data.addElement(rowData2);
 		
 		Vector rowData3 = new Vector ();
-		rowData3.add("Test 4");
+		rowData3.add("Hors Forfait");
 		data.addElement(rowData3);
+		
+		Vector rowData4 = new Vector();
+		rowData4.add("Date");
+		rowData4.add("Libelle");
+		rowData4.add("Justification");
+		rowData4.add("Montant");
+		data.addElement(rowData4);
+		
+		try{
+			ResultSet rs = ModeleGeneration.getElementHorsForfait(mois, id);
+			int i = 0;
+			while(rs.next()){
+				String justif = "oui";
+				if(rs.getString(4).equals("")){
+					justif = "non";
+				}
+				
+				Vector nom = new Vector();
+				nom.add(rs.getString(1));
+				nom.add(rs.getString(2));
+				nom.add(justif);
+				nom.add(rs.getString(3));
+				data.addElement(nom);
+			}
+			rs.close();
+			ModeleGeneration.deconnexionBD();
+		}
+		catch(SQLException e){
+			System.out.println("Erreur : \n" + e);
+		}
 		
 		return data;
 	}
@@ -74,7 +113,7 @@ public class GenererPDF implements ActionListener, Printable{
 	public int print (Graphics g, PageFormat pf, int pageIndex)
 	{
 		int y = 20;
-		int lineHeight = g.getFontMetrics().getHeight() + 5;
+		int lineHeight = g.getFontMetrics().getHeight() + 7;
 		g.drawString("Fiche de remboursement du mois de " + this.mois, 175, y);
 		g.drawString(ModeleGeneration.getNom(this.id), 500, y = y + 17);
 		g.drawString(ModeleGeneration.getPrenom(this.id), 500, y = y + 17);
@@ -121,7 +160,7 @@ public class GenererPDF implements ActionListener, Printable{
 				String cellString = (String)nextRow.elementAt (col);
 				g.drawString (cellString, currentX, y + (lineHeight / 2));
 				
-				int colWidth = 130;
+				int colWidth = 135;
 				if (m_ColumnWidths != null && m_ColumnWidths.length > col)
 				{
 					colWidth = 150;
@@ -130,7 +169,7 @@ public class GenererPDF implements ActionListener, Printable{
 				// Draw grid if needed
 				if (m_DrawGrid)
 				{
-					g.drawRect (currentX, y - (lineHeight / 2), colWidth, lineHeight);
+					g.drawRect (currentX - 5, y - (lineHeight / 2) + 4, colWidth, lineHeight);
 				}
 				
 				// Advance x
@@ -161,7 +200,7 @@ public class GenererPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		GenererPDF tablePrinter = new GenererPDF(initData(), null, true, "a131", "201811");
+		GenererPDF tablePrinter = new GenererPDF(initData("a131", "201810"), null, true, "a131", "201810");
         
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);

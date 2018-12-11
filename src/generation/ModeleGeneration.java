@@ -222,9 +222,9 @@ public class ModeleGeneration {
 /* *************************************************************************************************************** */
 	
 	//getNbForfaisEtape du visiteur
-	public static int getNbForfaisEtape(String mois, String id) {
+	public static String getNbForfaisEtape(String mois, String id) {
 		connexionBD();
-		int nb = 0;
+		String nb = "";
 		String idFrais = "ETP";		
 		
 		try {
@@ -235,7 +235,7 @@ public class ModeleGeneration {
 			rs = pst.executeQuery();
 			
 			if(rs.next()) {
-				nb = rs.getInt(1);
+				nb = rs.getString(1);
 			}
 			rs.close();
 		}
@@ -248,9 +248,9 @@ public class ModeleGeneration {
 	}
 	
 	//getNbKilometre du visiteur
-	public static int getNbKilometre(String mois, String id) {
+	public static String getNbKilometre(String mois, String id) {
 		connexionBD();
-		int nb = 0;
+		String nb = "";
 		String idFrais = "KM";		
 		
 		try {
@@ -261,7 +261,7 @@ public class ModeleGeneration {
 			rs = pst.executeQuery();
 			
 			if(rs.next()) {
-				nb = rs.getInt(1);
+				nb = rs.getString(1);
 			}
 			rs.close();
 		}
@@ -274,9 +274,9 @@ public class ModeleGeneration {
 	}
 	
 	//getNbNuite du visiteur
-	public static int getNbNuite(String mois, String id) {
+	public static String getNbNuite(String mois, String id) {
 		connexionBD();
-		int nb = 0;
+		String nb = "";
 		String idFrais = "NUI";		
 		
 		try {
@@ -287,7 +287,7 @@ public class ModeleGeneration {
 			rs = pst.executeQuery();
 			
 			if(rs.next()) {
-				nb = rs.getInt(1);
+				nb = rs.getString(1);
 			}
 			rs.close();
 		}
@@ -300,9 +300,9 @@ public class ModeleGeneration {
 	}
 	
 	//getNbRepas du visiteur
-	public static int getNbRepas(String mois, String id) {
+	public static String getNbRepas(String mois, String id) {
 		connexionBD();
-		int nb = 0;
+		String nb = "";
 		String idFrais = "REP";		
 		
 		try {
@@ -313,134 +313,13 @@ public class ModeleGeneration {
 			rs = pst.executeQuery();
 			
 			if(rs.next()) {
-				nb = rs.getInt(1);
+				nb = rs.getString(1);
 			}
 			rs.close();
 		}
 		catch(SQLException e) {
 			System.out.println("Erreur : \n" + e);
 		}
-		
-		deconnexionBD();
-		return nb;
-	}
-/* *************************************************************************************************************** */
-	
-
-	
-/* *************************************************************************************************************** */
-	//Récupération des Montant forfaitisé
-/* *************************************************************************************************************** */
-	//getMontantEtape du visiteur
-	public static int getMontantEtape(String mois, String id) {
-		connexionBD();
-		int nb = 0;
-		String idFrais = "ETP";
-		
-		try {
-			pst = connexion.prepareStatement("SELECT montant FROM fraisforfait WHERE id = ?");
-			pst.setString(1, idFrais);
-			rs = pst.executeQuery();
-			
-			if(rs.next()) {
-				nb = rs.getInt(1)*getNbForfaisEtape(mois, id);
-			}
-			rs.close();
-		}
-		catch(SQLException e) {
-			System.out.println("Erreur : \n" + e);
-		}
-		
-		deconnexionBD();
-		return nb;
-	}
-	
-	//getMontantKm du visiteur
-	public static float getMontatKm(String mois, String id) {
-		connexionBD();
-		float nb = 0;
-		String idFrais = "CAT";
-
-		try {
-			pst = connexion.prepareStatement("SELECT quantite FROM lignefraisforfait WHERE idvisiteur =  ? AND mois = ? AND idfraisforfait = ?");
-			pst.setString(1, id);
-			pst.setString(2, mois);
-			pst.setString(3, idFrais);
-			rs = pst.executeQuery();
-			
-			if(rs.next()) {
-				nb = rs.getFloat(1);
-			}
-			rs.close();
-		}
-		catch(SQLException e) {
-			System.out.println("Erreur : \n" + e);
-		}
-		deconnexionBD();
-		return nb;
-	}
-	public static float getTotalMontantKm(String mois, String id) {
-		return getNbKilometre(mois, id) * getMontatKm(mois, id);
-	}
-	
-	
-	//getMontantNuite du visiteur
-	public static int getMontantNuite(String mois, String id) {
-		connexionBD();
-		int nb = 0;
-		String idFrais = "NUI";		
-
-		try {
-			pst = connexion.prepareStatement("SELECT montant FROM fraisforfait WHERE id = ?");
-			pst.setString(1, idFrais);
-			rs = pst.executeQuery();
-			
-			if(rs.next()) {
-				nb = rs.getInt(1)*getNbNuite(mois, id);
-			}
-			rs.close();
-		}
-		catch(SQLException e) {
-			System.out.println("Erreur : \n" + e);
-		}
-		
-		deconnexionBD();
-		return nb;
-	}
-	
-	//getMontantRepas du visiteur
-	public static int getMontantRepas(String mois, String id) {
-		connexionBD();
-		int nb = 0;
-		String idFrais = "REP";		
-
-		try {
-			pst = connexion.prepareStatement("SELECT montant FROM fraisforfait WHERE id = ?");
-			pst.setString(1, idFrais);
-			rs = pst.executeQuery();
-			
-			if(rs.next()) {
-				nb = rs.getInt(1)*getNbRepas(mois, id);
-			}
-			rs.close();
-		}
-		catch(SQLException e) {
-			System.out.println("Erreur : \n" + e);
-		}
-		
-		deconnexionBD();
-		return nb;
-	}
-	
-	//getMontantTotal du visiteur
-	public static float getMontantTotalForfait(String mois, String id) {
-		connexionBD();
-		float nb = 0;
-		
-		nb = getMontantEtape(mois, id);
-		nb = nb + getTotalMontantKm(mois, id);
-		nb = nb + getMontantNuite(mois, id);
-		nb = nb + getMontantRepas(mois, id);
 		
 		deconnexionBD();
 		return nb;
@@ -497,7 +376,7 @@ public class ModeleGeneration {
 	//getNbJustificatif
 	public static String getNbJustif(String mois, String id) {
 		connexionBD();
-		String nb = "0";
+		String nb = "";
 		String justif = " ";
 		
 		try {
