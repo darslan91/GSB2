@@ -67,10 +67,16 @@ public class GenererPDF implements ActionListener, Printable{
 		String nbKiloM = ModeleGeneration.getNbKilometre(mois, id);
 		String nbNuite = ModeleGeneration.getNbNuite(mois, id);
 		String nbRepas = ModeleGeneration.getNbRepas(mois, id);
-		rowData2.add(nbForfaitEtp);
-		rowData2.add(nbKiloM);
-		rowData2.add(nbNuite);
-		rowData2.add(nbRepas);
+		
+		System.out.println("Forfait etp "+nbForfaitEtp );
+		System.out.println("Frais klm " +nbKiloM);
+		System.out.println("Nuité hotel " +nbNuite);
+		System.out.println("Repas " +nbRepas);
+		
+		rowData2.addElement(nbForfaitEtp);
+		rowData2.addElement(nbKiloM);
+		rowData2.addElement(nbNuite);
+		rowData2.addElement(nbRepas);
 		data.addElement(rowData2);
 		
 		Vector rowData3 = new Vector ();
@@ -200,7 +206,7 @@ public class GenererPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		GenererPDF tablePrinter = new GenererPDF(initData("a131", "201810"), null, true, "a131", "201810");
+		GenererPDF tablePrinter = new GenererPDF(initData(this.id, this.mois), null, true, this.id, this.mois);
         
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);
