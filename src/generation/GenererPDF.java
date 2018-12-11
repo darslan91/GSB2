@@ -47,25 +47,24 @@ public class GenererPDF implements ActionListener, Printable{
 	
 	public static Vector initData (){
 		Vector data = new Vector ();
+		Vector rowData = new Vector ();
 		
-		// Initialize data
-//		for (int row = 0; row < 100; ++row){
-			Vector rowData = new Vector ();
-//			for (int col = 0; col < 5; ++col){	
-				rowData.addElement("test 1");
-				rowData.addElement("test 2");
-//				rowData.addElement("Test 2");
-//			}
-			data.addElement(rowData);
-//		}
-
+		rowData.add("Test 1");
+		rowData.add("Test 2");
+		data.addElement(rowData);
+		
+		Vector rowData2 = new Vector ();
+		rowData2.add("Test 3");
+		data.addElement(rowData2);
+		
 		return data;
 	}
 	
 	public int print (Graphics g, PageFormat pf, int pageIndex)
 	{
+		int y = 15;
 		int lineHeight = g.getFontMetrics().getHeight();
-		g.drawString("test de bite", 5, 10);
+		g.drawString("test de l'affichage", 15, 20);
 		// Reset current pos
 		int currentRow = 0;
 		if (pageIndex == 0)
@@ -101,10 +100,11 @@ public class GenererPDF implements ActionListener, Printable{
 			// Draw the next line
 			int currentX = (int)pf.getImageableX();
 			Vector nextRow = (Vector)m_Data.elementAt (currentRow);
+			y = y + 20;
 			for (int col = 0; col < nextRow.size(); ++col)
 			{
 				String cellString = (String)nextRow.elementAt (col);
-				g.drawString (cellString, currentX + CELL_MARGIN_X, currentY + CELL_MARGIN_Y);
+				g.drawString (cellString, currentX, y + (lineHeight / 2));
 				
 				int colWidth = DEFAULT_COLUMN_WIDTH;
 				if (m_ColumnWidths != null && m_ColumnWidths.length > col)
@@ -115,7 +115,7 @@ public class GenererPDF implements ActionListener, Printable{
 				// Draw grid if needed
 				if (m_DrawGrid)
 				{
-					g.drawRect (currentX, currentY - (lineHeight / 2), colWidth, lineHeight);
+					g.drawRect (currentX, y - (lineHeight / 2), colWidth, lineHeight);
 				}
 				
 				// Advance x
@@ -146,7 +146,7 @@ public class GenererPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		GenererPDF tablePrinter = new GenererPDF(initData (), null, true);
+		GenererPDF tablePrinter = new GenererPDF(initData(), null, true);
         
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);
