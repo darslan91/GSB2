@@ -54,13 +54,19 @@ public class GenererPDF implements ActionListener, Printable{
 		Vector data = new Vector ();
 		Vector rowData = new Vector ();
 		
-		rowData.add("Test 1");
-		rowData.add("Test 2");
+		rowData.add("Forfait Etape");
+		rowData.add("Frais Kilometrique");
+		rowData.add("Nuitée Hotel");
+		rowData.add("Repas Restaurant");
 		data.addElement(rowData);
 		
 		Vector rowData2 = new Vector ();
 		rowData2.add("Test 3");
 		data.addElement(rowData2);
+		
+		Vector rowData3 = new Vector ();
+		rowData3.add("Test 4");
+		data.addElement(rowData3);
 		
 		return data;
 	}
@@ -68,8 +74,12 @@ public class GenererPDF implements ActionListener, Printable{
 	public int print (Graphics g, PageFormat pf, int pageIndex)
 	{
 		int y = 20;
-		int lineHeight = g.getFontMetrics().getHeight();
-		g.drawString("Fiche de frais de " + ModeleGeneration.getNom(this.id) + " " + ModeleGeneration.getPrenom(this.id), 15, y);
+		int lineHeight = g.getFontMetrics().getHeight() + 5;
+		g.drawString("Fiche de remboursement du mois de " + this.mois, 175, y);
+		g.drawString(ModeleGeneration.getNom(this.id), 500, y = y + 17);
+		g.drawString(ModeleGeneration.getPrenom(this.id), 500, y = y + 17);
+		g.drawString(ModeleGeneration.getAdresse(this.id), 475, y = y + 17);
+		g.drawString("Elément forfaitisé :", 20, y = y + 30);
 		// Reset current pos
 		int currentRow = 0;
 		if (pageIndex == 0)
@@ -103,7 +113,7 @@ public class GenererPDF implements ActionListener, Printable{
 				currentY + lineHeight < pf.getImageableY() + pf.getImageableHeight())
 		{
 			// Draw the next line
-			int currentX = (int)pf.getImageableX();
+			int currentX = (int)pf.getImageableX() + 20;
 			Vector nextRow = (Vector)m_Data.elementAt (currentRow);
 			y = y + 20;
 			for (int col = 0; col < nextRow.size(); ++col)
@@ -111,10 +121,10 @@ public class GenererPDF implements ActionListener, Printable{
 				String cellString = (String)nextRow.elementAt (col);
 				g.drawString (cellString, currentX, y + (lineHeight / 2));
 				
-				int colWidth = DEFAULT_COLUMN_WIDTH;
+				int colWidth = 130;
 				if (m_ColumnWidths != null && m_ColumnWidths.length > col)
 				{
-					colWidth = m_ColumnWidths [col];
+					colWidth = 150;
 				}
 				
 				// Draw grid if needed

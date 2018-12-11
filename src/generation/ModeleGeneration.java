@@ -569,5 +569,27 @@ public class ModeleGeneration {
 			deconnexionBD();
 			return nom;
 		}
+		
+	//adresse
+		public static String getAdresse(String id) {
+			connexionBD();
+			String adr = "";
+			
+			try {
+				pst = connexion.prepareStatement("SELECT adresse FROM visiteur WHERE id = ?");
+				pst.setString(1, id);
+				
+				rs= pst.executeQuery();
+				if(rs.next()) {
+					adr = rs.getString(1);
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Erreur : \n" + e);
+			}
+			
+			deconnexionBD();
+			return adr;
+		}	
 /* *************************************************************************************************************** */	
 }
