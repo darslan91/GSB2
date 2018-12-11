@@ -156,7 +156,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			gc.fill = GridBagConstraints.BOTH;
 			gc.gridx = 0;
 			gc.gridy = 4;
-			gc.gridwidth = 3;
+			gc.gridwidth = 1;
 			this.add(this.btnPdf, gc);
 				//Déclaration pour le bouton
 			String nom = this.lstPersonne.getSelectedItem().toString();
@@ -192,7 +192,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			gc.fill = GridBagConstraints.BOTH;
 			gc.gridx = 0;
 			gc.gridy = 4;
-			gc.gridwidth = 3;
+			gc.gridwidth = 1;
 			this.add(this.btnPdf, gc);
 			
 				//Choix Constructeur
