@@ -11,6 +11,7 @@ import javax.swing.*;
 
 import panel.Vue;
 import action.validation.ActionValidationRechercheFicheFrais;
+import generation.GenererPDF;
 import generation.ModeleGeneration;
 
 public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
@@ -33,105 +34,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 	
 		//Vue
 	private Vue vue;
-	
-	public Panel_Pdf_Recherche(Vue vue, JLabel lblMsg) {
-		//Vue
-		this.vue = vue;
-		this.lblMsgVal = lblMsg;
-		
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints gc = new GridBagConstraints();
-		gc.fill = GridBagConstraints.BOTH;
-		
-		//Instanciation
-			//label
-		this.lblMessage = new JLabel("Recherche Utilisateur");
-		this.lblListePersonne = new JLabel("Visiteur");
-		this.lblListMois = new JLabel("Mois");
-		this.lblErreur = new JLabel(" ");
-			
-			//List
-		//Vérification pour éviter le nul pointer
-		if(ModeleGeneration.getNbMois() == 0) {
-				//Déclaration lstMois
-			this.lstMois = new JComboBox();
-			String[] tab = new String[1];
-			tab[0] = "Aucune Fiche";
-			this.lstMois.addItem(tab[0]);
-			
-			//Déclaration lstPersonne
-			this.lstPersonne = new JComboBox();
-			String[] tab2 = new String[1];
-			tab2[0] = "Aucune Personne";
-			this.lstPersonne.addItem(tab2[0]);
-			
-			//Button
-			this.btnPdf = new JButton("PDF");
-			String mois = this.lstMois.getSelectedItem().toString();
-			String nom = this.lstPersonne.getSelectedItem().toString();
-//			this.btnPdf.addActionListener(new );
-			this.btnXml = new JButton("XML");
-//			this.btnXml.addActionListener(new GenerationXML(mois, nom));
-			
-			
-		}
-		else {
-			//Déclaration lstMois
-			this.lstMois = new JComboBox(ModeleGeneration.getDateFicheFrais());
-			this.lstMois.addItemListener(this);
-		
-			//Déclaration lstPersonne
-			this.lstPersonne = new JComboBox(ModeleGeneration.getTabNomVisiteur(this.lstMois.getSelectedItem().toString(), ModeleGeneration.getNbVisiteurMois(this.lstMois.getSelectedItem().toString())));
-			this.lstPersonne.addItemListener(this);
-			
-			//Button
-			this.btnPdf = new JButton("Valider");
-			String mois = this.lstMois.getSelectedItem().toString();
-			String nom = this.lstPersonne.getSelectedItem().toString();
-			this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
-		
-			gc.gridx = 0;
-			gc.gridy = 4;
-			gc.gridwidth = 1;
-			this.add(this.btnPdf, gc);
-			gc.gridx = 2;
-			gc.gridy = 4;
-			this.add(this.btnXml, gc);
-		}	
-		
-		//Contrainte
-		
-			//Ajout
-		gc.gridx = 0;
-		gc.gridy = 0;
-		gc.gridwidth = 1;
-		this.add(this.lblMessage, gc);
-		gc.gridx = 0;
-		gc.gridy = 1;
-		this.add(this.lblListMois, gc);
-		gc.gridx = 1;
-		gc.gridy = 1;
-		gc.gridwidth = 2;
-		this.add(this.lstMois, gc);
-		gc.gridx = 0;
-		gc.gridy = 2;
-		gc.gridwidth = 1;
-		this.add(this.lblListePersonne, gc);
-		gc.gridx = 1;
-		gc.gridy = 2;
-		gc.gridwidth = 2;
-		this.add(this.lstPersonne, gc);
-		gc.gridx = 0;
-		gc.gridy = 3;
-		gc.gridwidth = 3;
-		this.add(this.lblErreur, gc);
-		
-		gc.gridx = 0;
-		gc.gridy = 5;
-		gc.gridwidth = 3;
-		this.add(this.lblMsgVal, gc);
-	}
-	
+
 	public Panel_Pdf_Recherche(Vue vue) {
 		//Vue
 		this.vue = vue;
@@ -178,7 +81,8 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			this.btnPdf = new JButton("PDF");
 			String mois = this.lstMois.getSelectedItem().toString();
 			String nom = this.lstPersonne.getSelectedItem().toString();
-//			this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
+			String id = ModeleGeneration.getId(nom);
+			this.btnPdf.addActionListener(new GenererPDF(GenererPDF.initData(id, mois), null, true, id, mois));
 			this.btnXml = new JButton("XML");
 //			this.btnXml.addActionListener(new GenerationXML(mois, nom));
 			
@@ -259,10 +163,12 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			
 				//Choix Constructeur
 			if(this.lblMsgVal.equals(" ")) {
-//				this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
+				String id = ModeleGeneration.getId(nom);
+				this.btnPdf.addActionListener(new GenererPDF(GenererPDF.initData(id, mois), null, true, id, mois));
 			}
 			else {
-//				this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
+				String id = ModeleGeneration.getId(nom);
+				this.btnPdf.addActionListener(new GenererPDF(GenererPDF.initData(id, mois), null, true, id, mois));
 			}
 			
 			this.revalidate();
@@ -291,10 +197,12 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			
 				//Choix Constructeur
 			if(this.lblMsgVal.equals(" ")) {
-//				this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
+				String id = ModeleGeneration.getId(nom);
+				this.btnPdf.addActionListener(new GenererPDF(GenererPDF.initData(id, mois), null, true, id, mois));
 			}
 			else {
-//				this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
+				String id = ModeleGeneration.getId(nom);
+				this.btnPdf.addActionListener(new GenererPDF(GenererPDF.initData(id, mois), null, true, id, mois));
 			}
 			
 				//Ajout des itemListener
