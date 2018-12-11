@@ -60,19 +60,15 @@ public class ModeleGeneration {
 		} 
 	}
 /* *************************************************************************************************************** */
-	
-	
-	
-/* *************************************************************************************************************** */
 	//Affichage des utilisateurs dans les JComboBox
 /* *************************************************************************************************************** */	
 	//getLesDate
 	public static String[] getDateFicheFrais(){
 		String tab[] = new String[getNbMois()];
 		connexionBD();
-		String etat = "CR";
+		String etat = "LA JE MET UN TRUCK INCONGRU POUR QU'IL PRENNE TOUT";
 		try {
-			pst = connexion.prepareStatement("SELECT distinct(mois) FROM fichefrais WHERE idetat = ?");
+			pst = connexion.prepareStatement("SELECT distinct(mois) FROM fichefrais WHERE idetat != ?");
 			pst.setString(1, etat);
 			rs = pst.executeQuery();
 			int i = 0;
@@ -94,9 +90,9 @@ public class ModeleGeneration {
 	public static int getNbMois() {
 		connexionBD();
 		int nb = 0;
-		String etat = "CR";
+		String etat = "LA JE MET UN TRUCK INCONGRU POUR QU'IL PRENNE TOUT";
 		try {
-			pst = connexion.prepareStatement("SELECT COUNT(DISTINCT(mois)) FROM fichefrais WHERE idetat = ? ");
+			pst = connexion.prepareStatement("SELECT COUNT(DISTINCT(mois)) FROM fichefrais WHERE idetat != ? ");
 			pst.setString(1, etat);
 			rs = pst.executeQuery();
 			
@@ -112,14 +108,14 @@ public class ModeleGeneration {
 		return nb;
 	}
 	
-	//getTabNomVisiteur
+	//getTabNomVisiteur à DEPLACER DANS UN AUTRE MODELE
 	public static String[] getTabNomVisiteur(String date, int nb){
 		String tab[] = new String[nb];
 		connexionBD();
-		String etat = "CR";
+		String etat = "LA JE MET UN TRUCK INCONGRU POUR QU'IL PRENNE TOUT";
 		int i = 0;
 		try {
-			pst = connexion.prepareStatement("SELECT nom FROM visiteur v, fichefrais f WHERE v.id = f.idvisiteur AND mois = ? AND idetat = ?");
+			pst = connexion.prepareStatement("SELECT nom FROM visiteur v, fichefrais f WHERE v.id = f.idvisiteur AND mois = ? AND idetat != ?");
 			pst.setString(1, date);
 			pst.setString(2, etat);
 			rs = pst.executeQuery();
@@ -139,10 +135,10 @@ public class ModeleGeneration {
 	public static int getNbVisiteurMois(String val) {
 		connexionBD();
 		int nb = 0;
-		String etat = "CR";
+		String etat = "LA JE MET UN TRUCK INCONGRU POUR QU'IL PRENNE TOUT";
 		
 		try {
-			pst = connexion.prepareStatement("SELECT COUNT(DISTINCT(idVisiteur))FROM fichefrais WHERE idetat = ? AND mois = ?");
+			pst = connexion.prepareStatement("SELECT COUNT(DISTINCT(idVisiteur))FROM fichefrais WHERE idetat != ? AND mois = ?");
 			pst.setString(1, etat);
 			pst.setString(2, val);
 			rs = pst.executeQuery();
