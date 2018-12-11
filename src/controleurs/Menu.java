@@ -39,7 +39,6 @@ public class Menu extends JMenuBar{
 	
 			//PDF
 	private JMenuItem afficherPDF;
-	private JMenuItem enregistrementXML;
 			//Vue
 	private panel.Vue vue;
 	
@@ -66,10 +65,8 @@ public class Menu extends JMenuBar{
 		this.consulterFicheCloture = new JMenuItem("Fiche Cloturé");
 		this.consulterFicheCloture.addActionListener(new ActionConsulterFicheCloture(this.vue));
 				//pdfMn
-		this.afficherPDF = new JMenuItem("PDF");
+		this.afficherPDF = new JMenuItem("PDF / XML");
 		this.afficherPDF.addActionListener(new ActionConsulterPDF(this.vue));
-		this.enregistrementXML = new JMenuItem("XML");
-//		this.enregistrementXML.addActionListener(new ActionConsulterPDF(this.vue));
 				//Mon profil
 		this.monProfil = new JMenuItem("Mon profil");
 		this.monProfil.addActionListener(new ActionConsulterProfil(this.vue));
@@ -86,7 +83,6 @@ public class Menu extends JMenuBar{
 		this.consulterFicheMn.add(this.consulterFicheCloture);
 			//Item pdf dans pdfMn
 		this.pdfMn.add(this.afficherPDF);
-		this.pdfMn.add(this.enregistrementXML);
 			//Item monprofil
 		this.profilUtilisateurMn.add(this.monProfil);
 		this.profilUtilisateurMn.add(this.deconnexion);

@@ -28,7 +28,8 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 	private JComboBox lstMois;
 	
 		//Button
-	private JButton btnValider;
+	private JButton btnPdf;
+	private JButton btnXml;
 	
 		//Vue
 	private Vue vue;
@@ -55,7 +56,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 				//Déclaration lstMois
 			this.lstMois = new JComboBox();
 			String[] tab = new String[1];
-			tab[0] = "Aucune Fiche à l'état VA";
+			tab[0] = "Aucune Fiche";
 			this.lstMois.addItem(tab[0]);
 			
 			//Déclaration lstPersonne
@@ -65,10 +66,14 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			this.lstPersonne.addItem(tab2[0]);
 			
 			//Button
-			this.btnValider = new JButton("Valider");
+			this.btnPdf = new JButton("PDF");
 			String mois = this.lstMois.getSelectedItem().toString();
 			String nom = this.lstPersonne.getSelectedItem().toString();
-			this.btnValider.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
+//			this.btnPdf.addActionListener(new );
+			this.btnXml = new JButton("XML");
+//			this.btnXml.addActionListener(new GenerationXML(mois, nom));
+			
+			
 		}
 		else {
 			//Déclaration lstMois
@@ -80,15 +85,18 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			this.lstPersonne.addItemListener(this);
 			
 			//Button
-			this.btnValider = new JButton("Valider");
+			this.btnPdf = new JButton("Valider");
 			String mois = this.lstMois.getSelectedItem().toString();
 			String nom = this.lstPersonne.getSelectedItem().toString();
-			this.btnValider.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
+			this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
 		
 			gc.gridx = 0;
 			gc.gridy = 4;
-			gc.gridwidth = 3;
-			this.add(this.btnValider, gc);
+			gc.gridwidth = 1;
+			this.add(this.btnPdf, gc);
+			gc.gridx = 2;
+			gc.gridy = 4;
+			this.add(this.btnXml, gc);
 		}	
 		
 		//Contrainte
@@ -167,15 +175,20 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			
 			
 			//Button
-			this.btnValider = new JButton("Valider");
+			this.btnPdf = new JButton("PDF");
 			String mois = this.lstMois.getSelectedItem().toString();
 			String nom = this.lstPersonne.getSelectedItem().toString();
-//			this.btnValider.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
+//			this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
+			this.btnXml = new JButton("XML");
+//			this.btnXml.addActionListener(new GenerationXML(mois, nom));
 			
 			gc.gridx = 0;
 			gc.gridy = 4;
-			gc.gridwidth = 3;
-			this.add(this.btnValider, gc);
+			gc.gridwidth = 1;
+			this.add(this.btnPdf, gc);
+			gc.gridx = 2;
+			gc.gridy = 4;
+			this.add(this.btnXml, gc);
 		}
 		
 		//Contrainte
@@ -213,7 +226,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 		if(e.getSource() == this.lstMois) {
 				
 				//Enlever le panel
-			this.remove(this.btnValider);
+			this.remove(this.btnPdf);
 				//Enlever l'écoute sinon ca boucle sur l'autre puis erreur
 			this.lstPersonne.removeItemListener(this);
 				//enlever les item
@@ -235,21 +248,21 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			
 				//Contrainte
 			GridBagConstraints gc = new GridBagConstraints();
-			this.btnValider = new JButton("Valider");
+			this.btnPdf = new JButton("Valider");
 			gc.fill = GridBagConstraints.BOTH;
 			gc.gridx = 0;
 			gc.gridy = 4;
 			gc.gridwidth = 3;
-			this.add(this.btnValider, gc);
+			this.add(this.btnPdf, gc);
 				//Déclaration pour le bouton
 			String nom = this.lstPersonne.getSelectedItem().toString();
 			
 				//Choix Constructeur
 			if(this.lblMsgVal.equals(" ")) {
-//				this.btnValider.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
+//				this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
 			}
 			else {
-//				this.btnValider.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
+//				this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
 			}
 			
 			this.revalidate();
@@ -258,7 +271,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 		if(e.getSource() == this.lstPersonne) {
 				
 				//Enlever le panel
-			this.remove(this.btnValider);
+			this.remove(this.btnPdf);
 				//enlever les intemlistener
 			this.lstMois.removeItemListener(this);
 			this.lstPersonne.removeItemListener(this);
@@ -269,19 +282,19 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			
 				//Contrainte
 			GridBagConstraints gc = new GridBagConstraints();
-			this.btnValider = new JButton("Valider");
+			this.btnPdf = new JButton("Valider");
 			gc.fill = GridBagConstraints.BOTH;
 			gc.gridx = 0;
 			gc.gridy = 4;
 			gc.gridwidth = 3;
-			this.add(this.btnValider, gc);
+			this.add(this.btnPdf, gc);
 			
 				//Choix Constructeur
 			if(this.lblMsgVal.equals(" ")) {
-//				this.btnValider.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
+//				this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, this.lblMsgVal,  mois, nom));
 			}
 			else {
-//				this.btnValider.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
+//				this.btnPdf.addActionListener(new ActionValidationRechercheFicheFrais(this.vue, mois, nom));
 			}
 			
 				//Ajout des itemListener
