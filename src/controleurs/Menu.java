@@ -67,7 +67,7 @@ public class Menu extends JMenuBar{
 		this.consulterFicheCloture.addActionListener(new ActionConsulterFicheCloture(this.vue));
 				//pdfMn
 		this.afficherPDF = new JMenuItem("PDF");
-		this.afficherPDF.addActionListener(new GenererPDF(GenererPDF.initData(), null, true));
+		this.afficherPDF.addActionListener(new GenererPDF(GenererPDF.initData(), null, true, "a131", "201811"));
 		this.enregistrementXML = new JMenuItem("XML");
 //		this.enregistrementXML.addActionListener(new ActionConsulterPDF(this.vue));
 				//Mon profil

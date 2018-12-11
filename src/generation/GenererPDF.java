@@ -28,13 +28,18 @@ public class GenererPDF implements ActionListener, Printable{
 	private Vector m_Data;
 	private int m_ColumnWidths [];
 	private boolean m_DrawGrid;
+		//info
+	private String id;
+	private String mois;
 	
 	/* CONSTRUCTEURS */
-	public GenererPDF(Vector data, int [] colWidths, boolean drawGrid){
+	public GenererPDF(Vector data, int [] colWidths, boolean drawGrid, String id, String mois){
 		super();
 		m_Data = data;
 		m_ColumnWidths = colWidths;
 		m_DrawGrid = drawGrid;
+		this.id = id;
+		this.mois = mois;
 	}
 
 /* *************************************************************************************************************** */
@@ -62,9 +67,9 @@ public class GenererPDF implements ActionListener, Printable{
 	
 	public int print (Graphics g, PageFormat pf, int pageIndex)
 	{
-		int y = 15;
+		int y = 20;
 		int lineHeight = g.getFontMetrics().getHeight();
-		g.drawString("test de l'affichage", 15, 20);
+		g.drawString("Fiche de frais de " + ModeleGeneration.getNom(this.id) + " " + ModeleGeneration.getPrenom(this.id), 15, y);
 		// Reset current pos
 		int currentRow = 0;
 		if (pageIndex == 0)
@@ -146,7 +151,7 @@ public class GenererPDF implements ActionListener, Printable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		GenererPDF tablePrinter = new GenererPDF(initData(), null, true);
+		GenererPDF tablePrinter = new GenererPDF(initData(), null, true, "a131", "201811");
         
         PrinterJob printerJob = PDFPrinterJob.getPrinterJob();
         printerJob.setPrintable(tablePrinter);
