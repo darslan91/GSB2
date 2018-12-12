@@ -290,6 +290,8 @@ public class ModeleConsulter {
 			rs.next();
 			
 			id = rs.getString("id");
+			
+			rs.close();
 		}
 		catch(SQLException erreur){
 			//Pas le bon ID, problème dans l'exécution de la requête
@@ -319,6 +321,7 @@ public class ModeleConsulter {
 			rs.next();
 			
 			monMontantValide = rs.getFloat("montantValide");
+			rs.close();
 		}
 		catch(SQLException erreur){
 			//Pas le bon montantValide, problème dans l'exécution de la requête

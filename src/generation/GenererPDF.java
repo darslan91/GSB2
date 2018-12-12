@@ -17,7 +17,6 @@ import com.qoppa.pdfWriter.PDFPrinterJob;
 public class GenererPDF implements ActionListener, Printable{
 	
 	/* ATTRIBUTS PRIVEES */
-	private panel.Vue vue;
 		//Page
 	private int m_CurrentPage;
 	private int m_CurrentPageStartRow;
