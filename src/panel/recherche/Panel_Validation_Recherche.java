@@ -55,7 +55,7 @@ public class Panel_Validation_Recherche extends JPanel implements ItemListener{
 				//Déclaration lstMois
 			this.lstMois = new JComboBox();
 			String[] tab = new String[1];
-			tab[0] = "Aucune Fiche à l'état VA";
+			tab[0] = "Aucune Fiche à l'état CR";
 			this.lstMois.addItem(tab[0]);
 			
 			//Déclaration lstPersonne
@@ -146,7 +146,7 @@ public class Panel_Validation_Recherche extends JPanel implements ItemListener{
 				//Déclaration lstMois
 			this.lstMois = new JComboBox();
 			String[] tab = new String[1];
-			tab[0] = "Aucune Fiche à l'état VA";
+			tab[0] = "Aucune Fiche à l'état CR";
 			this.lstMois.addItem(tab[0]);
 			
 			//Déclaration lstPersonne

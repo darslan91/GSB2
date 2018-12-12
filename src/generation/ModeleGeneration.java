@@ -1,5 +1,10 @@
 package generation;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +16,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.omg.Messaging.SyncScopeHelper;
 
@@ -393,12 +403,82 @@ public class ModeleGeneration {
 		deconnexionBD();
 		return nb;
 	}
+	
+	//getIdFicheFrais
+	public static String getIdFicheFrais(String mois, String id) {
+		connexionBD();
+		String nb = "";
+		
+		try {
+			pst = connexion.prepareStatement("SELECT idVisiteur FROM fichefrais WHERE mois = ? AND idvisiteur = ?");
+			pst.setString(1, mois);
+			pst.setString(2, id);
+			
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				nb = rs.getString(1);
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("Erreur : \n" + e);
+		}
+		
+		deconnexionBD();
+		return nb;
+	}
+	
+	//GetIdEtat
+	public static String getIdEtat(String mois, String id) {
+		connexionBD();
+		String nb = "";
+		
+		try {
+			pst = connexion.prepareStatement("SELECT idEtat FROM fichefrais WHERE mois = ? AND idvisiteur = ?");
+			pst.setString(1, mois);
+			pst.setString(2, id);
+			
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				nb = rs.getString(1);
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("Erreur : \n" + e);
+		}
+		
+		deconnexionBD();
+		return nb;
+	}
+	
+	//getMontantValide
+	public static String getMontantValide(String mois, String id) {
+		connexionBD();
+		String nb = "";
+		
+		try {
+			pst = connexion.prepareStatement("SELECT montantvalide FROM fichefrais WHERE mois = ? AND idvisiteur = ?");
+			pst.setString(1, mois);
+			pst.setString(2, id);
+			
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				nb = rs.getString(1);
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("Erreur : \n" + e);
+		}
+		
+		deconnexionBD();
+		return nb;
+	}
+	
 /* *************************************************************************************************************** */
 
 
 
 /* *************************************************************************************************************** */
-//Récupération nom et prénom
+//Récupération info
 /* *************************************************************************************************************** */
 
 	//Récupération du nom
@@ -465,6 +545,324 @@ public class ModeleGeneration {
 			
 			deconnexionBD();
 			return adr;
-		}	
-/* *************************************************************************************************************** */	
+		}
+	
+	//cp
+		public static String getCP(String id) {
+			connexionBD();
+			String adr = "";
+			
+			try {
+				pst = connexion.prepareStatement("SELECT cp FROM visiteur WHERE id = ?");
+				pst.setString(1, id);
+				
+				rs= pst.executeQuery();
+				if(rs.next()) {
+					adr = rs.getString(1);
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Erreur : \n" + e);
+			}
+			
+			deconnexionBD();
+			return adr;
+		}
+	//ville
+		public static String getVille(String id) {
+			connexionBD();
+			String adr = "";
+			
+			try {
+				pst = connexion.prepareStatement("SELECT ville FROM visiteur WHERE id = ?");
+				pst.setString(1, id);
+				
+				rs= pst.executeQuery();
+				if(rs.next()) {
+					adr = rs.getString(1);
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Erreur : \n" + e);
+			}
+			
+			deconnexionBD();
+			return adr;
+		}
+	//dateembauche
+		public static String getDateEmbauche(String id) {
+			connexionBD();
+			String adr = "";
+			
+			try {
+				pst = connexion.prepareStatement("SELECT dateembauche FROM visiteur WHERE id = ?");
+				pst.setString(1, id);
+				
+				rs= pst.executeQuery();
+				if(rs.next()) {
+					adr = rs.getString(1);
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Erreur : \n" + e);
+			}
+			
+			deconnexionBD();
+			return adr;
+		}
+/* *************************************************************************************************************** */
+
+
+
+/* *************************************************************************************************************** */
+//Récupération nom et prénom
+/* *************************************************************************************************************** */
+
+	//getidFraisForfait
+	public static String[] getIdFraisForfait(String mois, String id){
+		String result[] = new String[4];
+		connexionBD();
+		
+		try {
+			pst = connexion.prepareStatement("SELECT idfraisforfait FROM lignefraisforfait WHERE idvisiteur = ? AND mois = ?");
+			pst.setString(1, id);
+			pst.setString(2, mois);
+			
+			rs= pst.executeQuery();
+			if(rs.next()) {
+				result[0] = rs.getString(1);
+				result[1] = rs.getString(2);
+				result[2] = rs.getString(3);
+				result[3] = rs.getString(4);
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("Erreur : \n" + e);
+		}
+		
+		deconnexionBD();
+		
+		return result;
+	}
+	//getQuantite
+	public static String[] getQuantite(String mois, String id){
+		String result[] = new String[4];
+		connexionBD();
+		
+		try {
+			pst = connexion.prepareStatement("SELECT quantite FROM lignefraisforfait WHERE idvisiteur = ? AND mois = ?");
+			pst.setString(1, id);
+			pst.setString(2, mois);
+			
+			rs= pst.executeQuery();
+			if(rs.next()) {
+				result[0] = rs.getString(1);
+				result[1] = rs.getString(2);
+				result[2] = rs.getString(3);
+				result[3] = rs.getString(4);
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("Erreur : \n" + e);
+		}
+		
+		deconnexionBD();
+		
+		return result;
+	}	
+		
+/* *************************************************************************************************************** */
+
+
+
+/* *************************************************************************************************************** */
+//Récupération nom et prénom
+/* *************************************************************************************************************** */
+	
+	//Génération du XML
+	public static void genererXML(String mois, String id){
+		//Instanciation de la frame permettant d'afficher l'explorateur
+		JFrame parentFrame = new JFrame();
+
+		//Création de l'explorateur
+		JFileChooser fileChooser = new JFileChooser();
+
+		//Définition du titre de l'explorateur
+		fileChooser.setDialogTitle("Choisissez où vous souhaitez enregistrer votre PDF");
+
+		//Nous appliquons un filtre pour enregistrer en pdf
+		FileFilter filter = new FileNameExtensionFilter("Fichier XML","xml");
+		fileChooser.setFileFilter(filter);
+
+		//Booléen qui permet de vérifier si le comptable a validé l'enregistrement
+		int userSelection = fileChooser.showSaveDialog(parentFrame);
+
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+			String path = fileChooser.getSelectedFile().getAbsolutePath();
+			if (path.substring(path.length()-4, path.length()).equals(".xml")) {
+				path = fileChooser.getSelectedFile().getAbsolutePath();
+				
+				try{
+					FileOutputStream fichier = new FileOutputStream(fileChooser.getSelectedFile().getAbsolutePath());
+					ObjectOutputStream s = new ObjectOutputStream(fichier);
+					s.writeObject(creationXML(mois, id));
+					s.flush();
+					s.close();			
+				}
+				catch(IOException e){
+					System.out.println("Erreur : \n" + e);
+				}
+				//pdfDoc.saveDocument(fileChooser.getSelectedFile().getAbsolutePath());		
+				
+			} 
+			else {
+				path = fileChooser.getSelectedFile().getAbsolutePath()+".xml";
+				
+				try{
+					FileOutputStream fichier = new FileOutputStream(fileChooser.getSelectedFile().getAbsolutePath());
+					ObjectOutputStream s = new ObjectOutputStream(fichier);
+					s.writeObject(creationXML(mois, id));
+					s.flush();
+					s.close();			
+				}
+				catch(IOException e){
+					System.out.println("Erreur : \n" + e);
+				}
+				//pdfDoc.saveDocument(fileChooser.getSelectedFile().getAbsolutePath()+".pdf");
+				
+			}
+		}
+	}
+	
+	//Création du xml
+	public static String creationXML(String mois, String id){
+		String result = "";
+		result = result +"<GSB2>\n";
+		
+			//visiteur
+		result = result + "    <VISITEUR>\n";
+		
+		result = result + "        <NOM>\n";
+		result = result + "            "+getNom(id)+"\n";
+		result = result + "        </NOM>\n";
+		
+		result = result + "        <PRENOM>\n";
+		result = result + "            "+getPrenom(id)+"\n";
+		result = result + "        </PRENOM>\n";
+		
+		result = result + "        <ADRESSE>\n";
+		result = result + "            "+getAdresse(id)+"\n";
+		result = result + "        </ADRESSE>\n";
+		
+		result = result + "        <CP>\n";
+		result = result + "            "+getCP(id)+"\n";
+		result = result + "        </CP>\n";
+		
+		result = result + "        <VILLE>\n";
+		result = result + "            "+getVille(id)+"\n";
+		result = result + "        </VILLE>\n";
+		
+		result = result + "        <DATEEMBAUCHE>\n";
+		result = result + "            "+getDateEmbauche(id)+"\n";
+		result = result + "        </DATEEMBAUCHE>\n";
+		
+		result = result + "        <ROLE>\n";
+		result = result + "            0"+"\n";
+		result = result + "        </ROLE>\n";
+		
+		result = result + "    </VISITEUR>\n";
+		
+			//fichefrais
+		result = result + "    <FICHEFRAIS>\n";
+		
+		result = result + "        <ID>\n";
+		result = result + "            "+getIdFicheFrais(mois, id)+"\n";
+		result = result + "        </ID>\n";
+		
+		result = result + "        <MOIS>\n";
+		result = result + "            "+mois+"\n";
+		result = result + "        </MOIS>\n";
+		
+		result = result + "        <IDETAT>\n";
+		result = result + "            "+getIdEtat(mois, id)+"\n";
+		result = result + "        </IDETAT>\n";
+		
+		result = result + "        <NBJUSTIFICATIF(S)>\n";
+		result = result + "            "+getNbJustif(mois, id)+"\n";
+		result = result + "        </NBJUSTIFICATIF(S)>\n";
+		
+		result = result + "        <MONTANTVALIDE>\n";
+		result = result + "            "+getMontantValide(mois, id)+"\n";
+		result = result + "        </MONTANTVALIDE>\n";
+		
+		result = result + "        <DATEMODIF>\n";
+		result = result + "            "+getDateModif(mois, id)+"\n";
+		result = result + "        </DATEMODIF>\n";
+		
+		result = result + "    </FICHEFRAIS>\n";
+		
+			//fraisforfait
+		result = result + "    <LIGNEFRAISFORFAITS>\n";
+		
+		for(int i = 0; i<4 ; i++){
+		result = result + "        <LIGNEFRAISFORFAIT>\n";
+		
+		result = result + "            <ID>\n";
+		result = result + "                "+id+"\n";
+		result = result + "            </ID>\n";
+		
+		result = result + "            <MOIS>\n";
+		result = result + "                "+mois+"\n";
+		result = result + "            </MOIS>\n";
+		
+		result = result + "            <IDFRAISFORFAIT>\n";
+		result = result + "                "+getIdFraisForfait(mois, id)[i]+"\n";
+		result = result + "            </IDFRAISFORFAIT>\n";
+		
+		result = result + "            <QUANTITE>\n";
+		result = result + "                "+getQuantite(mois, id)[i]+"\n";
+		result = result + "            </QUANTITE>\n";
+		
+		result = result + "        </LIGNEFRAISFORFAIT>\n";
+		}
+		
+		result = result + "    </LIGNEFRAISFORFAITS>\n";
+		
+			//fraisHorsforfait
+		
+		result = result + "    <LIGNEFRAISHORSFORFAITS>\n";
+		
+		result = result + "        <LIGNEFRAISHORSFORFAIT>\n";
+		
+		result = result + "            <ID>\n";
+		result = result + "            </ID>\n";
+		
+		result = result + "            <IDVISITEUR>\n";
+		result = result + "            </IDVISITEUR>\n";
+		
+		result = result + "            <MOIS>\n";
+		result = result + "            </MOIS>\n";
+		
+		result = result + "            <LIBELLE>\n";
+		result = result + "            </LIBELLE>\n";
+		
+		result = result + "            <DATE>\n";
+		result = result + "            </DATE>\n";
+		
+		result = result + "            <MONTANT>\n";
+		result = result + "            </MONTANT>\n";
+		
+		result = result + "            <LIEN>\n";
+		result = result + "            </LIEN>\n";
+		
+		result = result + "        </LIGNEFRAISHORSFORFAIT>\n";
+		
+		result = result + "    </LIGNEFRAISHORSFORFAITS>\n";
+		
+		result = result + "</GSB2>";
+		
+		
+		return result;
+	}
+	
 }
