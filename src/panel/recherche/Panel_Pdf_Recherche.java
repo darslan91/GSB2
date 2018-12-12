@@ -152,7 +152,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			
 				//Contrainte
 			GridBagConstraints gc = new GridBagConstraints();
-			this.btnPdf = new JButton("Valider");
+			this.btnPdf = new JButton("PDF");
 			gc.fill = GridBagConstraints.BOTH;
 			gc.gridx = 0;
 			gc.gridy = 4;
@@ -188,7 +188,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			
 				//Contrainte
 			GridBagConstraints gc = new GridBagConstraints();
-			this.btnPdf = new JButton("Valider");
+			this.btnPdf = new JButton("PDF");
 			gc.fill = GridBagConstraints.BOTH;
 			gc.gridx = 0;
 			gc.gridy = 4;
