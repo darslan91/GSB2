@@ -12,6 +12,7 @@ import javax.swing.*;
 import panel.Vue;
 import action.validation.ActionValidationRechercheFicheFrais;
 import generation.GenererPDF;
+import generation.GenererXML;
 import generation.ModeleGeneration;
 
 public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
@@ -84,7 +85,7 @@ public class Panel_Pdf_Recherche extends JPanel implements ItemListener{
 			String id = ModeleGeneration.getId(nom);
 			this.btnPdf.addActionListener(new GenererPDF(GenererPDF.initData(id, mois), null, true, id, mois));
 			this.btnXml = new JButton("XML");
-//			this.btnXml.addActionListener(new GenerationXML(mois, nom));
+			this.btnXml.addActionListener(new GenererXML(id, mois));
 			
 			gc.gridx = 0;
 			gc.gridy = 4;
