@@ -1,4 +1,5 @@
 package controleurs;
+
 import modele.Modele;
 import modele.validation.ModeleValider;
 import panel.Vue;
@@ -9,6 +10,7 @@ public class Controleur {
 		// TODO Auto-generated method stub
 		
 		Vue uneVue = new Vue();
+		
 	}
 
 }
