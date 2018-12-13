@@ -138,7 +138,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 	//	System.out.println(val);
 		this.revalidate();
 	//	this.btnConsulter.removeActionListener(new ActionConsulterDetailFicheRembourser(this.vue, val));
-		this.btnConsulter.addActionListener(new ActionConsulterDetailFicheRembourser(this.vue, val));
+		this.btnConsulter.addActionListener(new ActionConsulterDetailFicheRembourser(this.vue, nom, prenom, mois));
 	}
 
 

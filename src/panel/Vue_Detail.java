@@ -17,7 +17,7 @@ public class Vue_Detail extends JFrame{
 		this.setTitle("Fiche frais");
 		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		/* DECLARATION ET INSTANCIATION DES ELEMENTS */
 		this.panelGlobal = new JPanel();

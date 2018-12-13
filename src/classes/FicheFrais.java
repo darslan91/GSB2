@@ -48,6 +48,16 @@ public class FicheFrais {
 		this.nbJustificatifs =unNbJustificatif;
 	}
 	
+		//Constructeur acec l'idVisiteur, le mois, le nombre de justificatifs, le montant valider, la date de modification et l'idEtat
+	public FicheFrais(String unIdVisiteur, String unMois, int unNbJustificatifs, float unMontantValide, Date uneDateModif, String unIdEtat){
+		this.idVisiteur = unIdVisiteur;
+		this.mois = unMois;
+		this.nbJustificatifs = unNbJustificatifs;
+		this.montantValide = unMontantValide;
+		this.dateModif = uneDateModif;
+		this.idEtat = unIdEtat;
+	}
+	
 	
 	//Accesseurs
 		//idVisiteur

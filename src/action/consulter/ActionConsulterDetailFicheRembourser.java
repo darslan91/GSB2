@@ -20,7 +20,9 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 
 	/* ATTRIBUTS PRIVEES */
 	private panel.Vue vue;
-	private int ligne;
+	private Object mois;
+	private Object nom;
+	private Object prenom;
 	private ArrayList<FicheFrais> lesFichesFraisRembourser;
 
 	private JTable table;
@@ -30,9 +32,12 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 	
 	
 	/* CONSTRUCTEURS */
-	public ActionConsulterDetailFicheRembourser(Vue uneVue, int ligne){
+	public ActionConsulterDetailFicheRembourser(Vue uneVue, Object nom, Object prenom, Object mois){
 		this.vue = uneVue;
-		this.ligne = ligne;
+		this.mois = mois;
+		this.prenom = prenom;
+		this.nom = nom;
+		
 		//récupération indice tableau (créer un nv tableau pour récupération)
 		this.lesFichesFraisRembourser = ModeleConsulter.getLesFichesFraisRembourser();
 	}
@@ -43,37 +48,37 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 //		Vue uneVue = new Vue();	
 		//System.out.println(this.ligne);
 		//String []title = {"Nom", "Prénom", "Mois", "Montant validé", "Date modification", "Nombre de Justificatif"};
-		Object nom = null; 
+		/*Object nom = null; 
 		Object prenom = null; 
-		Object mois = null;
-		this.i = 0;
-		data = new Object[lesFichesFraisRembourser.size()][6];
-		for(FicheFrais uneFiche : lesFichesFraisRembourser){
+		Object mois = null;*/
+		//this.i = 0;
+	//	data = new Object[lesFichesFraisRembourser.size()][6];
+	//	for(FicheFrais uneFiche : lesFichesFraisRembourser){
 			
-			data[this.i][0] = uneFiche.getNom();
-			
-			data[this.i][1] = uneFiche.getPrenom();
-			
-			data[this.i][2] = uneFiche.getMois();
-			
-			data[this.i][3] = uneFiche.getMontantValide();
-			data[this.i][4] = uneFiche.getDateModif();
-			data[this.i][5] = uneFiche.getNbJustificatifs();
-			this.i = this.i+1;
+	//		data[this.i][0] = uneFiche.getNom();
+			//nom = data[this.i][0];	
+	//		data[this.i][1] = uneFiche.getPrenom();
+			//prenom = data[this.i][1];
+	//		data[this.i][2] = uneFiche.getMois();
+			//mois = data[this.i][2];
+	//		data[this.i][3] = uneFiche.getMontantValide();
+	//		data[this.i][4] = uneFiche.getDateModif();
+	//		data[this.i][5] = uneFiche.getNbJustificatifs();
+	//		this.i = this.i+1;
 			/*String id = ModeleConsulter.getId(data[this.i][0] , data[this.i][1] );
 			float montant = ModeleConsulter.getMontantValider(data[this.i][2], id);
 			Object mois = data[this.i][2];*/
 			
 
-		}
+		//}
 		
 		
 		//RECUPERATION DES VALEURS
-		System.out.println(this.i);
+		/*System.out.println(this.i);
 		 
 		nom = data[this.i-1][0];
 		prenom = data[this.i-1][1];
-		mois = data[this.i-1][2];
+		mois = data[this.i-1][2];*/
 		
 		/*table = new JTable(data, title);
 		//Nom
@@ -94,10 +99,12 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		//Recuperation du mois à partir du tableau
 //		Object mois = data[this.i][2];
 		
-		this.vue.remove(this.vue.getContentPane());
+		/*this.vue.remove(this.vue.getContentPane());
 		this.vue.setContentPane(new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom))));
 		this.vue.setJMenuBar(new Menu(this.vue));
-		this.vue.revalidate();	
+		this.vue.revalidate();	*/
+		
+		new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom)));
 		
 		
 		

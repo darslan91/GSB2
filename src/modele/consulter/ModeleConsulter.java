@@ -6,7 +6,6 @@ import java.util.*;
 import java.util.Date;
 
 import classes.FicheFrais;
-import classes.LigneFraisForfait;
 import panel.Vue;
 
 
@@ -314,15 +313,16 @@ public class ModeleConsulter {
 /   a ce mois passer en paramètre
  */
 	public static float getMontantValider(Object mois, String id){
+		connexionBD();
 		float monMontantValide = 0;
 		
 		try{
 			
-			String req = "SELECT montantValider FROM fichefrais WHERE idVisiteur = ? AND mois = ?";
+			String req = "SELECT montantValide FROM fichefrais WHERE idVisiteur = ? AND mois = ?";
 			statement = connexion.prepareStatement(req);
-			statement.setString(1, mois.toString());
-			statement.setString(2, id);
-			rs = statement.executeQuery(req);
+			statement.setString(1, id);
+			statement.setString(2, mois.toString());
+			rs = statement.executeQuery();
 			rs.next();
 			
 			monMontantValide = rs.getFloat("montantValide");
@@ -338,8 +338,37 @@ public class ModeleConsulter {
 		return monMontantValide;
 	}
 	
-	
 
+/* -------------------------------------------------------------------------------------------
+/							RECUPERER LA FICHE FRAIS 
+/  ------------------------------------------------------------------------------------------- 
+/ 	Cette méthodes permet de récuperer la fiche de frais pour ce mois et cette id
+/ 	 à un instant T. 
+ */
+	public static FicheFrais getFicheFrais(Object mois, String id){
+		connexionBD();
+		FicheFrais ff= new FicheFrais();
+		
+		try{
+			String req = " SELECT * FROM fichefrais WHERE idVisiteur = ? AND mois = ?";
+			statement = connexion.prepareStatement(req);
+			statement.setString(1, id);
+			statement.setString(2, mois.toString());
+			rs = statement.executeQuery();
+			rs.next();
+			
+			ff = new FicheFrais(rs.getString("idVisiteur"), rs.getString("mois"), rs.getInt("nbJustificatifs"), rs.getFloat("montantValide"), rs.getDate("dateModif"), rs.getString("idEtat"));
+			rs.close();
+			statement.close();
+		}
+		catch(SQLException erreur){
+			System.out.println("Une erreur est surevenue dans la requête " + erreur);
+		}
+		
+		
+		deconnexionBD();
+		return ff;
+	}
 	
 	
 	
