@@ -63,11 +63,11 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 		
 		c.gridx = 0;
 		c.gridy = 1;
-		this.add(lblId, c);
+		this.add(lblEtat, c);
 		
 		c.gridx = 0;
 		c.gridy = 2;
-		this.add(lblEtat, c);
+		this.add(lblMontantValider, c);
 		
 		/*String []title = {"Forfait Etapes", "Nombre kilomètre", "Nuité hôtel", "Repas restaurant", "Total"};
 		data = new Object[lesFichesFraisRembourser.size()][5];

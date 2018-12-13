@@ -13,9 +13,9 @@ import panel.Vue;
 public class ModeleConsulter {
 
 	//attribut privé
-	private static Statement st;
+	//private static Statement st;
 	private static ResultSet rs;
-	//private static PreparedStatement statement;
+	private static PreparedStatement statement;
 	private static Connection connexion ;
 	
 	
@@ -39,8 +39,6 @@ public class ModeleConsulter {
 			//Connexion à la BDD
 			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
 		//	connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
-			
-			st = connexion.createStatement();
 		} 
 		catch (ClassNotFoundException erreur) {
 			System.out.println("Driver non chargé!" + erreur);
@@ -145,11 +143,9 @@ public class ModeleConsulter {
 		
 		try{
 			//st = connexion.createStatement();
-			String req ="SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs "
-					+"FROM visiteur V, fichefrais F, etat E "
-					+"WHERE V.id = F.idVisiteur AND E.id = F.idEtat "
-					+"AND F.idEtat = 'VA' ";
-			rs = st.executeQuery(req);
+			String req ="SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs FROM visiteur V, fichefrais F, etat E WHERE V.id = F.idVisiteur AND E.id = F.idEtat AND F.idEtat = 'VA' ";
+			statement = connexion.prepareStatement(req);
+			rs = statement.executeQuery(req);
 			
 			while(rs.next()/*vrai*/){
 				
@@ -167,11 +163,13 @@ public class ModeleConsulter {
 				//System.out.println("Code = " + num + ", Nom = " + nom + ", Prénom = " + prenom + ", Email = " + email + ", Commentaire = " + commentaire);
 			}
 			rs.close();
+			statement.close();
 		}
 		catch(SQLException erreur){
 			//Requete fausse ou problème dans l'execution
 			System.out.println("Erreur dans l'execution de la requete " + erreur);
 		}
+		deconnexionBD();
 		return lesFichesFraisValider;
 		
 	}
@@ -193,11 +191,9 @@ public class ModeleConsulter {
 		
 		try{
 			//st = connexion.createStatement();
-			String req ="SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs "
-					+"FROM visiteur V, fichefrais F, etat E "
-					+"WHERE V.id = F.idVisiteur AND E.id = F.idEtat "
-					+"AND F.idEtat = 'RB' ";
-			rs = st.executeQuery(req);
+			String req = "SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs FROM visiteur V, fichefrais F, etat E WHERE V.id = F.idVisiteur AND E.id = F.idEtat AND F.idEtat = 'RB' ";
+			statement = connexion.prepareStatement(req);
+			rs = statement.executeQuery();
 			
 			while(rs.next()/*vrai*/){
 				
@@ -215,11 +211,14 @@ public class ModeleConsulter {
 				//System.out.println("Code = " + num + ", Nom = " + nom + ", Prénom = " + prenom + ", Email = " + email + ", Commentaire = " + commentaire);
 			}
 			rs.close();
+			statement.close();
 		}
 		catch(SQLException erreur){
 			//Requete fausse ou problème dans l'execution
 			System.out.println("Erreur dans l'execution de la requete " + erreur);
 		}
+		
+		deconnexionBD();
 		return lesFichesFraisRembourser;
 		
 	}
@@ -229,7 +228,7 @@ public class ModeleConsulter {
 /* *****************************************************************************************************************/	
 	public static ArrayList<FicheFrais> getLesFichesFraisCoursValidation(){
 		ArrayList<FicheFrais> lesFichesFraisCoursValidation = new ArrayList<FicheFrais>();
-		//connexioin a la base de données
+		//connexion a la base de données
 		connexionBD();
 		// variables
 		String nom;
@@ -241,11 +240,9 @@ public class ModeleConsulter {
 		
 		try{
 			//st = connexion.createStatement();
-			String req ="SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs "
-					+"FROM visiteur V, fichefrais F, etat E "
-					+"WHERE V.id = F.idVisiteur AND E.id = F.idEtat "
-					+"AND F.idEtat = 'CR' ";
-			rs = st.executeQuery(req);
+			String req = "SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs FROM visiteur V, fichefrais F, etat E WHERE V.id = F.idVisiteur AND E.id = F.idEtat AND F.idEtat = 'CR' ";
+			statement = connexion.prepareStatement(req);
+			rs = statement.executeQuery();
 			
 			while(rs.next()/*vrai*/){
 				
@@ -263,11 +260,14 @@ public class ModeleConsulter {
 				//System.out.println("Code = " + num + ", Nom = " + nom + ", Prénom = " + prenom + ", Email = " + email + ", Commentaire = " + commentaire);
 			}
 			rs.close();
+			statement.close();
 		}
 		catch(SQLException erreur){
 			//Requete fausse ou problème dans l'execution
 			System.out.println("Erreur dans l'execution de la requete " + erreur);
 		}
+		
+		deconnexionBD();
 		return lesFichesFraisCoursValidation;
 		
 	}
@@ -279,26 +279,30 @@ public class ModeleConsulter {
 /   On vas pouvoir l'id du visiteur grâce au nom et au prenom, récuperer par le tableau
  */
 	public static String getId(Object nom, Object prenom){
+		connexionBD();
 		String id = "";
 		
 		try{
-			String req = "SELECT id"
-					+ "FROM visiteur"
-					+ "WHERE nom = '" + nom +"'"
-					+ "AND prenom = '" + prenom + "'";
-			rs = st.executeQuery(req);
-			rs.next();
 			
-			id = rs.getString("id");
+			String req = "SELECT id FROM visiteur WHERE nom = ? AND prenom = ?";
+			PreparedStatement statement2 = connexion.prepareStatement(req);
+			statement2.setString(1, nom.toString());
+			statement2.setString(2, prenom.toString());
+			ResultSet rs2 = statement2.executeQuery();
+			rs2.next();
+			
+			id = rs2.getString("id");
 			
 			rs.close();
+			statement.close();
 		}
 		catch(SQLException erreur){
 			//Pas le bon ID, problème dans l'exécution de la requête
 			System.out.println("Erreur dans l'exécution de la requête " + erreur);
 		}
 		
-		return id ;
+		deconnexionBD();
+		return id;
 				
 	}
 	
@@ -311,23 +315,26 @@ public class ModeleConsulter {
  */
 	public static float getMontantValider(Object mois, String id){
 		float monMontantValide = 0;
-		 
+		
 		try{
-			String req = "SELECT montantValider"
-					+ "FROM fichefrais"
-					+ "WHERE idVisiteur = '" + id +"'"
-					+ "AND mois = '" + mois + "'";
-			rs = st.executeQuery(req);
+			
+			String req = "SELECT montantValider FROM fichefrais WHERE idVisiteur = ? AND mois = ?";
+			statement = connexion.prepareStatement(req);
+			statement.setString(1, mois.toString());
+			statement.setString(2, id);
+			rs = statement.executeQuery(req);
 			rs.next();
 			
 			monMontantValide = rs.getFloat("montantValide");
 			rs.close();
+			statement.close();
 		}
 		catch(SQLException erreur){
 			//Pas le bon montantValide, problème dans l'exécution de la requête
 			System.out.println("Erreur dans l'exécution de la requête " + erreur);
 		}
 		
+		deconnexionBD();
 		return monMontantValide;
 	}
 	

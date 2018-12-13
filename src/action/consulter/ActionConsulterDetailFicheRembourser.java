@@ -29,7 +29,6 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 	private int i;
 	
 	
-	
 	/* CONSTRUCTEURS */
 	public ActionConsulterDetailFicheRembourser(Vue uneVue, int ligne){
 		this.vue = uneVue;
@@ -44,18 +43,19 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 //		Vue uneVue = new Vue();	
 		//System.out.println(this.ligne);
 		//String []title = {"Nom", "Prénom", "Mois", "Montant validé", "Date modification", "Nombre de Justificatif"};
-		Object nom; 
-		Object prenom; 
-		Object mois;
+		Object nom = null; 
+		Object prenom = null; 
+		Object mois = null;
+		this.i = 0;
 		data = new Object[lesFichesFraisRembourser.size()][6];
 		for(FicheFrais uneFiche : lesFichesFraisRembourser){
 			
 			data[this.i][0] = uneFiche.getNom();
-			nom = data[this.i][0];
+			
 			data[this.i][1] = uneFiche.getPrenom();
-			prenom = data[this.i][1];
+			
 			data[this.i][2] = uneFiche.getMois();
-			mois = data[this.i][2];
+			
 			data[this.i][3] = uneFiche.getMontantValide();
 			data[this.i][4] = uneFiche.getDateModif();
 			data[this.i][5] = uneFiche.getNbJustificatifs();
@@ -71,9 +71,9 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		//RECUPERATION DES VALEURS
 		System.out.println(this.i);
 		 
-		 
-		 
-		
+		nom = data[this.i-1][0];
+		prenom = data[this.i-1][1];
+		mois = data[this.i-1][2];
 		
 		/*table = new JTable(data, title);
 		//Nom
