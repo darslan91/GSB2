@@ -30,6 +30,6 @@ public class GenererXML implements ActionListener{
 		ModeleGeneration.genererXML(this.mois, this.id);
 		
 	}
-	
+	//test
 	
 }
