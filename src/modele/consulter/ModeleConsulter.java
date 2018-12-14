@@ -370,7 +370,179 @@ public class ModeleConsulter {
 		return ff;
 	}
 	
+/* -------------------------------------------------------------------------------------------
+/							Info de thibault pour le profil 
+/  ------------------------------------------------------------------------------------------- 
+*/
+	//Récupération de l'id
+public static String getId(String login){
+	String id = "";
+	connexionBD();
 	
+	try {
+		statement = connexion.prepareStatement("SELECT id FROM visiteur WHERE login = ?");
+		statement.setString(1, login);
+		rs = statement.executeQuery();
+		
+		if(rs.next()) id = rs.getString(1);
+			
+		rs.close();
+	}
+	catch(SQLException e) {
+		System.out.println("Erreur : \n" + e );
+		e.printStackTrace();
+	}
+	deconnexionBD();
+	
+	return id;
+}
+
+	//récupération du nom
+public static String getNom(String id) {
+	String nom = "";
+	
+	connexionBD();
+	
+	try {
+		statement = connexion.prepareStatement("SELECT nom FROM visiteur WHERE id = ?");
+		statement.setString(1, id);
+		rs = statement.executeQuery();
+		
+		if(rs.next()) nom = rs.getString(1);
+			
+		rs.close();
+	}
+	catch(SQLException e) {
+		System.out.println("Erreur : \n" + e );
+		e.printStackTrace();
+	}
+	deconnexionBD();
+	
+	return nom;
+}
+
+	//récupération du prenom
+public static String getPrenom(String id) {
+	String nom = "";
+	
+	connexionBD();
+	
+	try {
+		statement = connexion.prepareStatement("SELECT prenom FROM visiteur WHERE id = ?");
+		statement.setString(1, id);
+		rs = statement.executeQuery();
+		
+		if(rs.next()) nom = rs.getString(1);
+			
+		rs.close();
+	}
+	catch(SQLException e) {
+		System.out.println("Erreur : \n" + e );
+		e.printStackTrace();
+	}
+	deconnexionBD();
+	
+	return nom;
+}
+
+	//Adresse
+public static String getAdresse(String id) {
+	String nom = "";
+	
+	connexionBD();
+	
+	try {
+		statement = connexion.prepareStatement("SELECT adresse FROM visiteur WHERE id = ?");
+		statement.setString(1, id);
+		rs = statement.executeQuery();
+		
+		if(rs.next()) nom = rs.getString(1);
+			
+		rs.close();
+	}
+	catch(SQLException e) {
+		System.out.println("Erreur : \n" + e );
+		e.printStackTrace();
+	}
+	deconnexionBD();
+	
+	return nom;
+}
+
+	//CP
+public static String getCp(String id) {
+	String nom = "";
+	
+	connexionBD();
+	
+	try {
+		statement = connexion.prepareStatement("SELECT cp FROM visiteur WHERE id = ?");
+		statement.setString(1, id);
+		rs = statement.executeQuery();
+		
+		if(rs.next()) nom = rs.getString(1);
+			
+		rs.close();
+	}
+	catch(SQLException e) {
+		System.out.println("Erreur : \n" + e );
+		e.printStackTrace();
+	}
+	deconnexionBD();
+	
+	return nom;
+}
+	
+	//Ville
+public static String getVille(String id) {
+	String nom = "";
+	
+	connexionBD();
+	
+	try {
+		statement = connexion.prepareStatement("SELECT ville FROM visiteur WHERE id = ?");
+		statement.setString(1, id);
+		rs = statement.executeQuery();
+		
+		if(rs.next()) nom = rs.getString(1);
+			
+		rs.close();
+	}
+	catch(SQLException e) {
+		System.out.println("Erreur : \n" + e );
+		e.printStackTrace();
+	}
+	deconnexionBD();
+	
+	return nom;
+}
+
+	//date embauche
+public static String getDateEmbauche(String id) {
+	String nom = "";
+	
+	connexionBD();
+	
+	try {
+		statement = connexion.prepareStatement("SELECT dateembauche FROM visiteur WHERE id = ?");
+		statement.setString(1, id);
+		rs = statement.executeQuery();
+		
+		if(rs.next()) nom = rs.getString(1);
+			
+		rs.close();
+	}
+	catch(SQLException e) {
+		System.out.println("Erreur : \n" + e );
+		e.printStackTrace();
+	}
+	deconnexionBD();
+	
+	return nom;
+}
+
+
+
 	
 	
 	

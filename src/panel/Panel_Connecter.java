@@ -15,14 +15,15 @@ public class Panel_Connecter extends JPanel{
 	private modele.Modele connexionSession;
 	private String login;
 	
-	public Panel_Connecter(Vue maVue){
+	public Panel_Connecter(Vue maVue, String login){
 		this.vue = maVue;
+		this.login = login;
 		//Vérification connexionSession
 		
 		//Déclaration
 			//Label
-		this.lblMessage = new JLabel("Bienvenue " /*+ nom*/);
+		this.lblMessage = new JLabel("Bienvenue " + ModeleConsulter.getNom(ModeleConsulter.getId(this.login)) + " " + ModeleConsulter.getPrenom(ModeleConsulter.getId(this.login)));
 		
-	
+		this.add(this.lblMessage);
 	}
 }

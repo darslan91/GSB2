@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import panel.Vue;
+import panel.consulter.Panel_Mon_Profil;
 
 public class ActionConsulterProfil implements ActionListener{
 	
@@ -21,7 +22,10 @@ public class ActionConsulterProfil implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		
-		System.out.println(this.login);
+		this.vue.remove(this.vue.getContentPane());
 		
+		this.vue.setContentPane(new Panel_Mon_Profil(this.vue, this.login));
+		
+		this.vue.revalidate();
 	}
 }
