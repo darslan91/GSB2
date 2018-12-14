@@ -77,7 +77,7 @@ public class Modele {
 		boolean result = false;
 		connexionBD();
 		String sql;
-		sql = "SELECT mdp FROM visiteur WHERE login ='" + login + "' ";
+		sql = "SELECT mdp FROM visiteur WHERE login ='" + login + "' AND role = 1";
 		String strMdp = "";
 		
 		try {
