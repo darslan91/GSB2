@@ -28,7 +28,7 @@ public class ActionValidationFicheFrais implements ActionListener{
 		this.vue.remove(this.vue.getContentPane());
 		
 			//Ajout menu
-		this.vue.setJMenuBar(new Menu(this.vue));
+//		this.vue.setJMenuBar(new Menu(this.vue));
 		
 			//Ajout recherche du panel
 		this.vue.setContentPane(new Panel_Validation_Recherche(this.vue));

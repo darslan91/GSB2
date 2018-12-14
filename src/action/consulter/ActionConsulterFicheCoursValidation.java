@@ -29,7 +29,7 @@ public class ActionConsulterFicheCoursValidation implements ActionListener{
 		
 		this.vue.remove(this.vue.getContentPane());
 		this.vue.setContentPane(new Panel_Fiche_En_Cours_De_Validation(this.lesFichesFraisCoursValidation));
-		this.vue.setJMenuBar(new Menu(this.vue));
+//		this.vue.setJMenuBar(new Menu(this.vue));
 		this.vue.revalidate();		
 		
 	}

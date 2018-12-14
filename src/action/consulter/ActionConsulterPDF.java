@@ -35,7 +35,7 @@ public class ActionConsulterPDF implements ActionListener{
 		this.vue.remove(this.vue.getContentPane());
 		
 			//Ajout menu
-		this.vue.setJMenuBar(new Menu(this.vue));
+//		this.vue.setJMenuBar(new Menu(this.vue));
 		
 			//Ajout recherche du panel
 		this.vue.setContentPane(new Panel_Pdf_Recherche(this.vue));

@@ -41,9 +41,12 @@ public class Menu extends JMenuBar{
 	private JMenuItem afficherPDF;
 			//Vue
 	private panel.Vue vue;
+			//login
+	private String login;
 	
-	public Menu(Vue uneVue){
+	public Menu(Vue uneVue, String login){
 		
+		this.login = login;
 		this.vue = uneVue;
 		//Déclaration		
 			//Sous Menu
@@ -69,7 +72,7 @@ public class Menu extends JMenuBar{
 		this.afficherPDF.addActionListener(new ActionConsulterPDF(this.vue));
 				//Mon profil
 		this.monProfil = new JMenuItem("Mon profil");
-		this.monProfil.addActionListener(new ActionConsulterProfil(this.vue));
+		this.monProfil.addActionListener(new ActionConsulterProfil(this.vue, this.login));
 		this.deconnexion = new JMenuItem("Deconnexion");
 		this.deconnexion.addActionListener(new ActionDeconnexion(this.vue));
 		

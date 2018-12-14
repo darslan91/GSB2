@@ -42,7 +42,7 @@ public class ActionConnexion implements ActionListener{
 			//ajouter un panel
 			this.vue.setContentPane(new Panel_Connecter(this.vue));
 			//ajouter le MenuBar
-			this.vue.setJMenuBar(new Menu(this.vue));
+			this.vue.setJMenuBar(new Menu(this.vue, this.jtfLogin.getText()));
 			//rafraichit la page
 			this.vue.revalidate();
 		}

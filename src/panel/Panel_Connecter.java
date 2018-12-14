@@ -13,22 +13,15 @@ public class Panel_Connecter extends JPanel{
 	private JLabel lblMessage;
 	private Vue vue;
 	private modele.Modele connexionSession;
+	private String login;
 	
 	public Panel_Connecter(Vue maVue){
 		this.vue = maVue;
-		
 		//Vérification connexionSession
-		
-		
-		
 		
 		//Déclaration
 			//Label
 		this.lblMessage = new JLabel("Bienvenue " /*+ nom*/);
-		
-		//Affichage
-			//Menu
-		this.vue.setJMenuBar(new Menu(this.vue));
 		
 	
 	}

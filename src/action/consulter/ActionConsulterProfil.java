@@ -10,15 +10,18 @@ public class ActionConsulterProfil implements ActionListener{
 	//Attribut
 		//Vue
 	private Vue vue;
+	private String login;
 	
 	//Constructeur
-	public ActionConsulterProfil(Vue uneVue){
+	public ActionConsulterProfil(Vue uneVue, String login){
 		this.vue = uneVue;
+		this.login = login;
 	}
 
 	
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		System.out.println(this.login);
 		
 	}
 }
