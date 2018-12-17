@@ -202,7 +202,7 @@ public class GenererPDF implements ActionListener, Printable{
 //Action listener
 /* *************************************************************************************************************** */	
 	
-	@Override
+	//@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		GenererPDF tablePrinter = new GenererPDF(initData(this.id, this.mois), null, true, this.id, this.mois);

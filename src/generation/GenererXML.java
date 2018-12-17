@@ -24,7 +24,7 @@ public class GenererXML implements ActionListener{
 		this.mois = mois;
 	}
 
-	@Override
+	//@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
 		ModeleGeneration.genererXML(this.mois, this.id);
