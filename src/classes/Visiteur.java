@@ -22,7 +22,11 @@ public class Visiteur {
 	public Visiteur(){
 		
 	}
-					
+	
+	public Visiteur(String login, String mdp, int nb) {
+		this.login = login;
+		this.mdp = mdp;
+	}
 							
 		//attributs
 	public Visiteur(String unId, String unNom, String unPrenom, String unLogin, String unMdp, String uneAdresse, String unCp, String uneVille, Date uneDateEmbauche, String unRole){

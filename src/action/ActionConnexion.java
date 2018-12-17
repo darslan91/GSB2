@@ -20,6 +20,7 @@ public class ActionConnexion implements ActionListener{
 	private JLabel lblErreur;
 	private JTextField jtfLogin;
 	private JPasswordField jpfMdp;
+	private int nb;
 	
 	/* CONSTRUCTEURS */
 	public ActionConnexion(Vue uneVue, JLabel lblErreur, JTextField unLogin, JPasswordField unMdp){
@@ -27,6 +28,14 @@ public class ActionConnexion implements ActionListener{
 		this.lblErreur = lblErreur;
 		this.jtfLogin = unLogin;
 		this.jpfMdp = unMdp;
+	}
+	
+	public ActionConnexion(Vue uneVue, JLabel lblErreur, JTextField unLogin, JPasswordField unMdp, int nb){
+		this.vue = uneVue;
+		this.lblErreur = lblErreur;
+		this.jtfLogin = unLogin;
+		this.jpfMdp = unMdp;
+		this.nb = nb;
 	}
 	
 	/* ACTION */
@@ -37,6 +46,11 @@ public class ActionConnexion implements ActionListener{
 		//vérifie la connexion utilisateur
 
 		if(Modele.connexionSession(jpfMdp.getPassword(), jtfLogin.getText())){
+				//Si appuis sur le btn
+			if(this.nb == 1) {
+				Modele.serialise(this.jtfLogin.getText(), this.jpfMdp.getPassword());
+			}
+			
 			//vide la fenetre
 			this.vue.remove(this.vue.getContentPane());
 			//ajouter un panel

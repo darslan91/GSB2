@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import javax.swing.*;
 
 import controleurs.Menu;
+import modele.Modele;
 
 public class Vue extends JFrame{
 	
@@ -23,7 +24,13 @@ public class Vue extends JFrame{
 		/* DECLARATION */
 			//Panel
 		this.panelGlobal = new JPanel();
-		this.setContentPane(new panel_Connexion(this));
+		if(Modele.resteConnecter()) {
+			this.setContentPane(new panel_ConnexionSave(this, Modele.getNomS(), Modele.getMdpS()));
+		}
+		else {
+			this.setContentPane(new panel_Connexion(this));
+		}
+		
 			//Affichage
 		this.getContentPane().add(this.panelGlobal);
 		this.setVisible(true);
