@@ -127,18 +127,19 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 
 
 	public void focusGained(FocusEvent arg0) {
-		// TODO Auto-genera ted method stub
+		
+			//Valeur de la ligne
 		int val = this.table.getSelectedRow();
 		
 			//récupération des éléments à passer dans le constructeur pour pas regénérer le tableau dans le actionConsulterDétail
 		Object nom = data[val][0];
 		Object prenom = data[val][1];
-		Object mois = data[val][2];
+		Object mois = data[val][2];		
 		
-	//	System.out.println(val);
-		this.revalidate();
-	//	this.btnConsulter.removeActionListener(new ActionConsulterDetailFicheRembourser(this.vue, val));
+		this.remove(this.btnConsulter);
+		this.btnConsulter = new JButton("Consulter");
 		this.btnConsulter.addActionListener(new ActionConsulterDetailFicheRembourser(this.vue, nom, prenom, mois));
+		
 	}
 
 
