@@ -161,7 +161,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 			
 			//JButton
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 2;
 		c.gridwidth = 1;
 		this.add(this.btnConsulter, c);
 		
