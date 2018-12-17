@@ -136,6 +136,9 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		Object prenom = data[val][1];
 		Object mois = data[val][2];		
 		
+		this.remove(this.btnConsulter);
+		
+		this.btnConsulter = new JButton("Consulter");
 		
 		//GridBagLayout
 		this.setLayout(new GridBagLayout());
@@ -145,8 +148,6 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 1;
-		this.remove(this.btnConsulter);
-		this.btnConsulter = new JButton("Consulter");
 		this.add(this.btnConsulter, c);
 		this.btnConsulter.addActionListener(new ActionConsulterDetailFicheRembourser(this.vue, nom, prenom, mois));
 		
