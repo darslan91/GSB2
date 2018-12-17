@@ -37,8 +37,8 @@ public class Modele {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
-	//		connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
+	//		connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
+			connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
 			st = connexion.createStatement();
 		} 
 		catch (ClassNotFoundException erreur) {
@@ -112,20 +112,15 @@ public class Modele {
 	public static boolean resteConnecter() {
 		boolean bool = false;
 		
-		ObjectInputStream ois = null;
 		try {
-			FileInputStream fichier = new FileInputStream("stock.ser");
-			ois = new ObjectInputStream(fichier);
+			
+			FileInputStream fis = new FileInputStream("stock.txt");
+	        ObjectInputStream ois = new ObjectInputStream(fis);
+			bool = true;
+	        ois.close();
+	        
 		} catch (final java.io.IOException e) {
 			System.out.println("Fichier non trouvé donc pas de sérialisation");
-		} finally {
-			try {
-				if (ois != null) {
-					ois.close();
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
 		}
 		
 		return bool;
@@ -138,11 +133,11 @@ public class Modele {
 		ObjectInputStream ois = null;
 		
 		try {
-			final FileInputStream fichier = new FileInputStream("stock.ser");
+			final FileInputStream fichier = new FileInputStream("stock.txt");
 			ois = new ObjectInputStream(fichier);
 			final Visiteur visiteur = (Visiteur) ois.readObject();
 			
-			nom = visiteur.getLogin();
+			nom = visiteur.getNom();
 			
 		} catch (final java.io.IOException e) {
 			e.printStackTrace();
@@ -167,11 +162,11 @@ public class Modele {
 		ObjectInputStream ois = null;
 		
 		try {
-			final FileInputStream fichier = new FileInputStream("stock.ser");
+			final FileInputStream fichier = new FileInputStream("stock.txt");
 			ois = new ObjectInputStream(fichier);
 			final Visiteur visiteur = (Visiteur) ois.readObject();
 			
-			mdp = visiteur.getMdp();
+			mdp = visiteur.getPrenom();
 			
 		} catch (final java.io.IOException e) {
 			e.printStackTrace();
@@ -190,18 +185,13 @@ public class Modele {
 	}
 	
 		//Sérialisation
-	public static void serialise(String login, char[] mdp) {
+	public static void serialise(String login, String mdp) {
 		
-		String mdpC = "";
-		for(int i =0; i < mdpC.length(); i++) {
-			mdpC = mdpC + mdp[i];
-		}
-		
-		Visiteur visiteur = new Visiteur(login, mdpC, 1);
+		Visiteur visiteur = new Visiteur(login, mdp);
 		ObjectOutputStream oos = null;
 		
 		try {
-			final FileOutputStream fichier = new FileOutputStream("stock.ser");
+			final FileOutputStream fichier = new FileOutputStream("stock.txt");
 			oos = new ObjectOutputStream(fichier);
 			oos.writeObject(visiteur);
 			oos.flush();

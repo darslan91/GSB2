@@ -1,8 +1,9 @@
 package classes;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Visiteur {
+public class Visiteur implements Serializable{
 	
 	//attribut privé
 	private String id;
@@ -15,6 +16,7 @@ public class Visiteur {
 	private String ville;
 	private Date dateEmbauche;
 	private String role;
+	private int nb;
 	
 	
 	//Constructeur
@@ -26,6 +28,7 @@ public class Visiteur {
 	public Visiteur(String login, String mdp, int nb) {
 		this.login = login;
 		this.mdp = mdp;
+		this.nb = nb;
 	}
 							
 		//attributs

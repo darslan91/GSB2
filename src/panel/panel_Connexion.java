@@ -28,6 +28,7 @@ public class panel_Connexion extends JPanel{
 	
 		//Vue
 	private Vue vue;
+	private int nb;
 	
 	/* CONSTRUCTEURS */
 	public panel_Connexion(Vue uneVue){
@@ -113,6 +114,7 @@ public class panel_Connexion extends JPanel{
 		
 		//Double nvb
 		this.vue = uneVue;
+		this.nb = nb;
 		
 		this.setLayout(new GridBagLayout());
 		
@@ -122,6 +124,7 @@ public class panel_Connexion extends JPanel{
 		this.lblLogin = new JLabel("Login : ");
 		this.lblMdp = new JLabel("Password : ");
 		this.lblErreur = new JLabel(" ");
+		
 		
 		this.lblErreur.setText("Non Retenu");
 		this.lblErreur.setForeground(Color.WHITE);
@@ -134,7 +137,7 @@ public class panel_Connexion extends JPanel{
 		
 			//Boutons
 		this.btnSeConnecter = new JButton("Se Connecter");
-		this.btnSeConnecter.addActionListener(new ActionConnexion(this.vue, this.lblErreur, this.jtfLogin, this.jpfMdp, nb));
+		this.btnSeConnecter.addActionListener(new ActionConnexion(this.vue, this.lblErreur, this.jtfLogin, this.jpfMdp, this.nb));
 		this.btnResterCo = new JButton("Retenir mes identifiants");
 		this.btnResterCo.addActionListener(new ActionResterCo(this.vue));
 		this.btnExit = new JButton("Exit");

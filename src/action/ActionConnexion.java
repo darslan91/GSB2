@@ -5,6 +5,7 @@ import panel.Vue;
 
 import java.awt.Color;
 import java.awt.event.*;
+import java.io.File;
 
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -48,11 +49,12 @@ public class ActionConnexion implements ActionListener{
 		if(Modele.connexionSession(jpfMdp.getPassword(), jtfLogin.getText())){
 				//Si appuis sur le btn
 			if(this.nb == 1) {
-				Modele.serialise(this.jtfLogin.getText(), this.jpfMdp.getPassword());
+				Modele.serialise(this.jtfLogin.getText(), this.jpfMdp.getText());
 			}
 			if(this.nb == 0) {
 				if(Modele.resteConnecter()) {
-					//Sup
+					File fichier = new File("stock.txt");
+					fichier.delete();
 				}
 			}
 			

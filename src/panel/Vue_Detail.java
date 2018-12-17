@@ -26,27 +26,7 @@ public class Vue_Detail extends JFrame{
 		this.setVisible(true);
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }
