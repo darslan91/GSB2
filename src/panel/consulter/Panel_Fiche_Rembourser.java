@@ -146,7 +146,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		c.fill = GridBagConstraints.BOTH;		
 		
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3;
 		c.gridwidth = 1;
 		this.add(this.btnConsulter, c);
 		this.btnConsulter.addActionListener(new ActionConsulterDetailFicheRembourser(this.vue, nom, prenom, mois));
