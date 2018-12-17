@@ -32,7 +32,7 @@ public class ActionNePlusRester implements ActionListener{
 
 		this.vue.setContentPane(new panel_Connexion(this.vue, this.nb));
 		
-		if(Modele.resteConnecter()) {
+		if(Modele.resteConnecter() && this.nb == 0) {
 			Path path = Paths.get("stock.txt");
 			try {
 			    Files.delete(path);

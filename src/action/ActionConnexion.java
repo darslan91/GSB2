@@ -51,12 +51,6 @@ public class ActionConnexion implements ActionListener{
 			if(this.nb == 1) {
 				Modele.serialise(this.jtfLogin.getText(), this.jpfMdp.getText());
 			}
-			if(this.nb == 0) {
-				if(Modele.resteConnecter()) {
-					File fichier = new File("stock.txt");
-					fichier.delete();
-				}
-			}
 			
 			
 			//vide la fenetre
