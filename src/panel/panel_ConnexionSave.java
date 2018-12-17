@@ -58,7 +58,7 @@ public class panel_ConnexionSave extends JPanel{
 		this.btnSeConnecter = new JButton("Se Connecter");
 		this.btnSeConnecter.addActionListener(new ActionConnexion(this.vue, this.lblErreur, this.jtfLogin, this.jpfMdp, 1));
 		this.btnNePlusRester = new JButton("Ne plus retenir");
-		this.btnNePlusRester.addActionListener(new ActionNePlusRester(this.vue, 1));
+		this.btnNePlusRester.addActionListener(new ActionNePlusRester(this.vue, 0));
 		this.btnExit = new JButton("Exit");
 		this.btnExit.addActionListener(new ActionExit(this.vue));
 		
@@ -137,7 +137,7 @@ public class panel_ConnexionSave extends JPanel{
 		this.btnSeConnecter = new JButton("Se Connecter");
 		this.btnSeConnecter.addActionListener(new ActionConnexion(this.vue, this.lblErreur, this.jtfLogin, this.jpfMdp));
 		this.btnNePlusRester = new JButton("Ne plus retenir");
-		this.btnNePlusRester.addActionListener(new ActionNePlusRester(this.vue, 1));
+		this.btnNePlusRester.addActionListener(new ActionNePlusRester(this.vue, 0));
 		this.btnExit = new JButton("Exit");
 		this.btnExit.addActionListener(new ActionExit(this.vue));
 		

@@ -44,12 +44,18 @@ public class ActionConnexion implements ActionListener{
 		// TODO Auto-generated method stub
 		
 		//vérifie la connexion utilisateur
-
+		
 		if(Modele.connexionSession(jpfMdp.getPassword(), jtfLogin.getText())){
 				//Si appuis sur le btn
 			if(this.nb == 1) {
 				Modele.serialise(this.jtfLogin.getText(), this.jpfMdp.getPassword());
 			}
+			if(this.nb == 0) {
+				if(Modele.resteConnecter()) {
+					//Sup
+				}
+			}
+			
 			
 			//vide la fenetre
 			this.vue.remove(this.vue.getContentPane());
