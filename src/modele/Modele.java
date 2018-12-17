@@ -120,7 +120,6 @@ public class Modele {
 	        ois.close();
 	        
 		} catch (final java.io.IOException e) {
-			System.out.println("Fichier non trouvé donc pas de sérialisation");
 		}
 		
 		return bool;
