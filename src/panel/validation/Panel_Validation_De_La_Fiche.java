@@ -74,6 +74,7 @@ public class Panel_Validation_De_La_Fiche extends JPanel{
 	public Panel_Validation_De_La_Fiche(Vue uneVue, String unMois, String unNom){
 		
 		this.setLayout(new GridBagLayout());
+		this.setBackground(Color.ORANGE);
 		
 		//Récupération de l'id de la personne
 		String id = ModeleValider.getId(unNom);

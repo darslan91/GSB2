@@ -1,5 +1,6 @@
 package panel.recherche;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,9 @@ public class Panel_Remboursement_Recherche extends JPanel implements ItemListene
 	private Vue vue;
 	
 	public Panel_Remboursement_Recherche(Vue vue, JLabel lblMsg) {
+		
+		this.setBackground(Color.ORANGE);
+		
 		//Vue
 		this.vue = vue;
 		this.lblMsgVal = lblMsg;
@@ -126,6 +130,9 @@ public class Panel_Remboursement_Recherche extends JPanel implements ItemListene
 	}
 	
 	public Panel_Remboursement_Recherche(Vue vue) {
+		
+		this.setBackground(Color.ORANGE);
+		
 		//Vue
 		this.vue = vue;
 		

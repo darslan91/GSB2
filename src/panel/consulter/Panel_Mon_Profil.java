@@ -1,5 +1,6 @@
 package panel.consulter;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -44,6 +45,8 @@ public class Panel_Mon_Profil extends JPanel{
 	public Panel_Mon_Profil(Vue vue, String login){
 		this.vue = vue;
 		this.login = login;
+		
+		this.setBackground(Color.ORANGE);
 		
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();

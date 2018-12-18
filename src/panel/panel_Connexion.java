@@ -38,6 +38,8 @@ public class panel_Connexion extends JPanel{
 		
 		this.setLayout(new GridBagLayout());
 		
+		this.setBackground(Color.ORANGE);
+		
 		/* DECLARATIONS */
 			//Labels
 		this.lblMessage = new JLabel("Connexion Comptable");
@@ -118,6 +120,8 @@ public class panel_Connexion extends JPanel{
 		this.nb = nb;
 		
 		this.setLayout(new GridBagLayout());
+		
+		this.setBackground(Color.ORANGE);
 		
 		/* DECLARATIONS */
 			//Labels

@@ -1,5 +1,6 @@
 package panel.recherche;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -34,6 +35,9 @@ public class Panel_Validation_Recherche extends JPanel implements ItemListener{
 	private Vue vue;
 	
 	public Panel_Validation_Recherche(Vue vue, JLabel lblMsg) {
+		
+		this.setBackground(Color.ORANGE);
+		
 		//Vue
 		this.vue = vue;
 		this.lblMsgVal = lblMsg;
@@ -125,6 +129,9 @@ public class Panel_Validation_Recherche extends JPanel implements ItemListener{
 	}
 	
 	public Panel_Validation_Recherche(Vue vue) {
+		
+		this.setBackground(Color.ORANGE);
+		
 		//Vue
 		this.vue = vue;
 		

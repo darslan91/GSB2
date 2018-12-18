@@ -73,6 +73,7 @@ public class Panel_Remboursement_De_La_Fiche extends JPanel{
 	public Panel_Remboursement_De_La_Fiche(Vue uneVue, String unMois, String unNom){
 		
 		this.setLayout(new GridBagLayout());
+		this.setBackground(Color.ORANGE);
 		
 		//Récupération de l'id de la personne
 		String id = ModeleRembourser.getId(unNom);

@@ -1,9 +1,10 @@
 package panel;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 import modele.consulter.ModeleConsulter;
-
 import controleurs.Menu;
 
 public class Panel_Connecter extends JPanel{
@@ -19,7 +20,7 @@ public class Panel_Connecter extends JPanel{
 		this.vue = maVue;
 		this.login = login;
 		//Vérification connexionSession
-		
+		this.setBackground(Color.ORANGE);
 		//Déclaration
 			//Label
 		this.lblMessage = new JLabel("Bienvenue " + ModeleConsulter.getNom(ModeleConsulter.getId(this.login)) + " " + ModeleConsulter.getPrenom(ModeleConsulter.getId(this.login)));
