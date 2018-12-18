@@ -1,5 +1,7 @@
 package panel;
 import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -43,6 +45,11 @@ public class panel_Connexion extends JPanel{
 		/* DECLARATIONS */
 			//Labels
 		this.lblMessage = new JLabel("Connexion Comptable");
+		Font font = this.lblMessage.getFont(); 
+		Map attributes = font.getAttributes(); 
+		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON); 
+		this.lblMessage.setFont(font.deriveFont(attributes));
+		
 		this.lblMessage.setSize(5, 10);
 		this.lblLogin = new JLabel("Login : ");
 		this.lblMdp = new JLabel("Password : ");
@@ -126,6 +133,11 @@ public class panel_Connexion extends JPanel{
 		/* DECLARATIONS */
 			//Labels
 		this.lblMessage = new JLabel("Connexion Comptable");
+		Font font = this.lblMessage.getFont(); 
+		Map attributes = font.getAttributes(); 
+		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON); 
+		this.lblMessage.setFont(font.deriveFont(attributes));
+		
 		this.lblMessage.setSize(5, 10);
 		this.lblLogin = new JLabel("Login : ");
 		this.lblMdp = new JLabel("Password : ");
