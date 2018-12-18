@@ -7,6 +7,7 @@ import java.util.Date;
 
 import classes.FicheFrais;
 import classes.LigneFraisForfait;
+import classes.LigneFraisHorsForfait;
 import panel.Vue;
 
 
@@ -405,6 +406,40 @@ public class ModeleConsulter {
 		return listeFF;
 	}
 	
+
+/* --------------------------------------------------------------------------------------------
+/				RECUPERER LES LIGNES LIGNES FRAIS HORS FORFAITS 
+/  --------------------------------------------------------------------------------------------
+/	Cette méthode permet de recuperer les ligne de frais hors forfait pour ce mois et cette id 
+/	 dans la table lignefraishorsforfait
+ */
+	public static ArrayList<LigneFraisHorsForfait> getLesFraisHorsForfaits (Object mois, String id){
+		connexionBD();
+		LigneFraisHorsForfait lfhf = new LigneFraisHorsForfait();
+		ArrayList<LigneFraisHorsForfait> listeFHF = new ArrayList<LigneFraisHorsForfait>();
+		
+		try{
+			
+			String req ="SELECT libelle, date, montant, lien FROM lignefraishorsforfait WHERE idVisiteur = ? AND mois = ?";
+			statement = connexion.prepareStatement(req);
+			statement.setString(1, id);
+			statement.setString(2, mois.toString());
+			rs = statement.executeQuery();
+						
+			while(rs.next()){
+				lfhf = new LigneFraisHorsForfait(rs.getString("libelle"), rs.getDate("date"), rs.getFloat("montant"), rs.getString("lien"));
+				listeFHF.add(lfhf);
+			}
+			rs.close();
+			statement.close();
+		}
+		catch(SQLException erreur){
+			System.out.println("Une erreur est surevenue dans la requête " + erreur);
+		}
+		deconnexionBD();
+		return listeFHF;
+	}
+
 	
 	
 	

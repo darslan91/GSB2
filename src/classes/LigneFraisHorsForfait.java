@@ -32,8 +32,19 @@ public class LigneFraisHorsForfait {
 		this.lien = unLien;
 	}
 				
-				
-				
+		//Constructeur utilidser dans le ModeleConsulter pour la methodes getLesFraisHorsForfait		
+	public LigneFraisHorsForfait(String unLibelle, Date uneDate, float unMontant, String unLien){
+		this.libelle = unLibelle;
+		this.date = uneDate;
+		this.montant = unMontant;
+		this.lien = unLien;
+	}
+	
+	
+	
+	
+	
+	
 	//Accesseurs
 		//id
 	public int getId() {
