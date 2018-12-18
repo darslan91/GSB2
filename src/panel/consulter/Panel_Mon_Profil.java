@@ -80,49 +80,43 @@ public class Panel_Mon_Profil extends JPanel{
 		gc.gridy = 0;
 		this.add(this.lblMessages, gc);
 		
-		gc.insets = new Insets(0,0,5,0);
+		gc.insets = new Insets(0,0,5,10);
 		gc.gridx = 0;
 		gc.gridy++;
-		this.add(this.lbl,gc);
+		this.add(this.lblId1,gc);
 		gc.gridx++;
-		gc.gridy++;
 		this.add(this.lblId, gc);
 		
 		gc.gridx = 0;
 		gc.gridy++;
-		this.add(this.,gc);
+		this.add(this.lblNom1,gc);
 		gc.gridx++;
-		gc.gridy++;
 		this.add(this.lblNom, gc);
 		
 		gc.gridx = 0;
 		gc.gridy++;
-		this.add(this.,gc);
+		this.add(this.lblPrenom1,gc);
 		gc.gridx++;
-		gc.gridy++;
 		this.add(this.lblPrenom, gc);
 		
 		gc.gridx = 0;
 		gc.gridy++;
-		this.add(this.,gc);
+		this.add(this.lblAdresse1,gc);
 		gc.gridx++;
-		gc.gridy++;
 		this.add(this.lblAdresse, gc);
 		gc.gridx++;
 		this.add(this.lblCp, gc);
 		
 		gc.gridx = 0;
 		gc.gridy++;
-		this.add(this.,gc);
+		this.add(this.lblVille1,gc);
 		gc.gridx++;
-		gc.gridy++;
 		this.add(this.lblVille, gc);
 		
 		gc.gridx = 0;
 		gc.gridy++;
-		this.add(this.,gc);
+		this.add(this.lblRole1,gc);
 		gc.gridx++;
-		gc.gridy++;
 		this.add(this.lblRole, gc);
 		
 	}
