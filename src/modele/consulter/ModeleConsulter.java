@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.Date;
 
 import classes.FicheFrais;
+import classes.LigneFraisForfait;
 import panel.Vue;
 
 
@@ -142,7 +143,7 @@ public class ModeleConsulter {
 		
 		try{
 			//st = connexion.createStatement();
-			String req ="SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs FROM visiteur V, fichefrais F, etat E WHERE V.id = F.idVisiteur AND E.id = F.idEtat AND F.idEtat = 'VA' ";
+			String req ="SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs FROM visiteur V, fichefrais F, etat E WHERE V.id = F.idVisiteur AND E.id = F.idEtat AND F.idEtat = 'VA' ORDER BY V.nom";
 			statement = connexion.prepareStatement(req);
 			rs = statement.executeQuery(req);
 			
@@ -190,7 +191,7 @@ public class ModeleConsulter {
 		
 		try{
 			//st = connexion.createStatement();
-			String req = "SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs FROM visiteur V, fichefrais F, etat E WHERE V.id = F.idVisiteur AND E.id = F.idEtat AND F.idEtat = 'RB' ";
+			String req = "SELECT nom, prenom, mois, montantValide, dateModif, nbJustificatifs FROM visiteur V, fichefrais F, etat E WHERE V.id = F.idVisiteur AND E.id = F.idEtat AND F.idEtat = 'RB' ORDER BY V.nom";
 			statement = connexion.prepareStatement(req);
 			rs = statement.executeQuery();
 			
@@ -370,6 +371,44 @@ public class ModeleConsulter {
 		return ff;
 	}
 	
+	
+/* -------------------------------------------------------------------------------------------
+/							RECUPERER LES LIGNES LIGNES FRAIS FORFAITS 
+/  ------------------------------------------------------------------------------------------- 
+/ 	Cette méthodes permet de récuperer les ligne frais forfait pour ce mois et cette id
+/ 	 dans la table lignefraisforfait 
+ */	
+	public static ArrayList<LigneFraisForfait> getLesFraisForfaits (Object mois, String id){
+		connexionBD();
+		LigneFraisForfait lff = new LigneFraisForfait();
+		ArrayList<LigneFraisForfait> listeFF = new ArrayList<LigneFraisForfait>();
+		
+		try{
+			
+			String req ="SELECT  quantite FROM lignefraisforfait WHERE idVisiteur = ? AND mois = ?";
+			statement = connexion.prepareStatement(req);
+			statement.setString(1, id);
+			statement.setString(2, mois.toString());
+			rs = statement.executeQuery();
+						
+			while(rs.next()){
+				lff = new LigneFraisForfait(rs.getFloat("quantite"));
+				listeFF.add(lff);
+			}
+			rs.close();
+			statement.close();
+		}
+		catch(SQLException erreur){
+			System.out.println("Une erreur est surevenue dans la requête " + erreur);
+		}
+		deconnexionBD();
+		return listeFF;
+	}
+	
+	
+	
+	
+	
 /* -------------------------------------------------------------------------------------------
 /							Info de thibault pour le profil 
 /  ------------------------------------------------------------------------------------------- 
@@ -540,6 +579,8 @@ public static String getDateEmbauche(String id) {
 	
 	return nom;
 }
+
+
 
 
 

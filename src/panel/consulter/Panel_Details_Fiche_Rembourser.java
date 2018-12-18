@@ -1,5 +1,6 @@
 package panel.consulter;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import javax.swing.*;
 
 import modele.consulter.ModeleConsulter;
 import classes.FicheFrais;
+import classes.LigneFraisForfait;
 
 public class Panel_Details_Fiche_Rembourser extends JLabel{
 	
@@ -33,7 +35,7 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 	
 	
 	/* CONSTRUCTEURS */
-	public Panel_Details_Fiche_Rembourser(String id, Object mois, float montant){
+	public Panel_Details_Fiche_Rembourser(String id, Object mois, float montant, ArrayList<LigneFraisForfait> listeFF){
 		
 		//GridBagLayout
 		this.setLayout(new GridBagLayout());
@@ -50,6 +52,34 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 		this.lblEtat = new JLabel("Etat de la fiche : Remboursée, de puis le : " + mois);
 			//Montant Valider
 		this.lblMontantValider = new JLabel("Montant Validé : " + montant);
+		
+		
+		String []title = {"Forfait Etape"," Coût Catégorie Véhicule", "Kilomètre", "Nuits", "Repas"};
+		data = new Object[1][5];
+	//	this.i  = 0;
+		//for(LigneFraisForfait uneFiche : listeFF){
+			data[0][0] = listeFF.get(1).getQuantite();
+			data[0][1] = listeFF.get(0).getQuantite();
+			data[0][2] = listeFF.get(2).getQuantite();
+			data[0][3] = listeFF.get(3).getQuantite();
+			data[0][4] = listeFF.get(4).getQuantite();
+	//		this.i = this.i+1;
+	//	}		
+		this.table = new JTable(data, title);
+		//this.table.setPreferredScrollableViewportSize(new Dimension(1000,16));
+		this.scroll = new JScrollPane(this.table);
+		//this.scroll.setPreferredSize(new Dimension(1000, 500));
+		
+		
+		System.out.println(listeFF.get(0).getQuantite());
+		
+		
+		
+		
+		
+		
+		
+		
 			//Eléments forfaitisés
 		//this.lblElementsForfaitises = new JLabel ("Eléments forfaitisés : ");
 			//Eléments non-forfaitisés
@@ -59,15 +89,21 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 		/*AJOUT DES PANELS */
 		c.gridx = 0;
 		c.gridy = 0;
-		this.add(lblId, c);
+		this.add(this.lblId, c);
 		
 		c.gridx = 0;
 		c.gridy = 1;
-		this.add(lblEtat, c);
+		this.add(this.lblEtat, c);
 		
 		c.gridx = 0;
 		c.gridy = 2;
-		this.add(lblMontantValider, c);
+		this.add(this.lblMontantValider, c);
+		
+		/*c.gridx = 0;
+		c.gridy = 3;
+		c.gridwidth = 2;*/
+		//c.gridheight = 5;
+		this.add(this.scroll);
 		
 		/*String []title = {"Forfait Etapes", "Nombre kilomètre", "Nuité hôtel", "Repas restaurant", "Total"};
 		data = new Object[lesFichesFraisRembourser.size()][5];

@@ -14,6 +14,7 @@ import panel.consulter.Panel_Details_Fiche_Rembourser;
 import panel.consulter.Panel_Fiche_En_Cours_De_Validation;
 import modele.consulter.ModeleConsulter;
 import classes.FicheFrais;
+import classes.LigneFraisForfait;
 import controleurs.Menu;
 
 public class ActionConsulterDetailFicheRembourser implements ActionListener{
@@ -24,12 +25,13 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 	private Object nom;
 	private Object prenom;
 	private ArrayList<FicheFrais> lesFichesFraisRembourser;
+	private ArrayList<LigneFraisForfait> lesFF;
 
-	private JTable table;
+	/*private JTable table;
 	private String[]title;
 	private Object [][] data;
 	private int i;
-	
+	*/
 	
 	/* CONSTRUCTEURS */
 	public ActionConsulterDetailFicheRembourser(Vue uneVue, Object nom, Object prenom, Object mois){
@@ -38,8 +40,11 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		this.prenom = prenom;
 		this.nom = nom;
 		
+		
+		this.lesFF = new ArrayList<LigneFraisForfait>();
+		
 		//récupération indice tableau (créer un nv tableau pour récupération)
-		this.lesFichesFraisRembourser = ModeleConsulter.getLesFichesFraisRembourser();
+		//this.lesFichesFraisRembourser = ModeleConsulter.getLesFichesFraisRembourser();
 	}
 
 	
@@ -103,8 +108,10 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		this.vue.setContentPane(new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom))));
 		this.vue.setJMenuBar(new Menu(this.vue));
 		this.vue.revalidate();	*/
+		this.lesFF = ModeleConsulter.getLesFraisForfaits(this.mois, ModeleConsulter.getId(nom, prenom));
 		
-		new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom)));
+		
+		new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom)), this.lesFF);
 		
 		
 		

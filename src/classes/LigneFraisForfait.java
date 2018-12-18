@@ -22,6 +22,10 @@ public class LigneFraisForfait {
 		this.idFraisFofait = unIdFraisForfait;
 		this.quantite = uneQuantite;
 	}
+	
+	public LigneFraisForfait (float uneQuantite){
+		this.quantite = uneQuantite;
+	}
 				
 				
 				
