@@ -54,6 +54,10 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 		this.lblEtat = new JLabel("Etat de la fiche : Remboursée, depuis le : " + mois);
 			//Montant Valider
 		this.lblMontantValider = new JLabel("Montant Validé : " + montant + " €");
+			//Elements forfatiser
+		this.lblElementsForfaitises = new JLabel("Eléments Forfaitiser");
+			//Elements hors forfait
+		this.lblElementsNonForfait = new JLabel("Eléments Hors Forfaits");
 	
 			//Tabeleau avec les titres des colonnes 
 		String []title = {"Forfait Etape"," Coût Catégorie Véhicule", "Kilomètre", "Nuits", "Repas"};
@@ -74,8 +78,7 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 		this.scroll.setPreferredSize(new Dimension(500,150));
 		
 		
-			//tableau hors forfaits
-		//Tabeleau avec les titres des colonnes 
+			//tableau hors forfaits 
 		String []title2 = {"Date"," Libellé ", " Montant ", " Justificatif "};
 			data2 = new Object[listeFHF.size()][4];
 			this.i = 0;	
@@ -90,14 +93,15 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 		
 		
 		this.table2 = new JTable(data2, title2);
-
 		this.scroll2 = new JScrollPane(this.table2);
 		
 		/*AJOUT AU PANEL LES ELEMENTS */
 		this.add(this.lblId);
 		this.add(this.lblEtat);
 		this.add(this.lblMontantValider);
+		this.add(this.lblElementsForfaitises);
 		this.add(this.scroll);
+		this.add(this.lblElementsNonForfait);
 		this.add(this.scroll2);
 		
 		
