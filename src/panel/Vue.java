@@ -34,6 +34,7 @@ public class Vue extends JFrame{
 		
 			//Affichage
 		this.getContentPane().add(this.panelGlobal);
+		this.panelGlobal.setBackground(Color.ORANGE);
 		this.setVisible(true);
 	}
 
