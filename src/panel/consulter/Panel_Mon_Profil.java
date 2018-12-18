@@ -1,8 +1,11 @@
 package panel.consulter;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -62,15 +65,19 @@ public class Panel_Mon_Profil extends JPanel{
 		this.lblAdresse1 = new JLabel("Adresse :");
 		this.lblVille1 = new JLabel("Ville :");
 		this.lblDateEmbauche1 = new JLabel("Date d'embauche :");
-		this.lblRole1 = new JLabel("Role :");
+		this.lblRole1 = new JLabel("Rôle :");
 		
 		this.lblMessages = new JLabel("Mon profil");
+		Font font = this.lblMessages.getFont(); 
+		Map attributes = font.getAttributes(); 
+		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON); 
+		this.lblMessages.setFont(font.deriveFont(attributes)); 
+		
 		this.lblId = new JLabel(id);
 		this.lblNom = new JLabel(nom);
 		this.lblPrenom = new JLabel(prenom);
 		this.lblAdresse = new JLabel(adresse);
-		this.lblCp = new JLabel(", "+cp);
-		this.lblVille = new JLabel(ville);
+		this.lblVille = new JLabel(cp+"  "+ville);
 		this.lblDateEmbauche = new JLabel(dateEmbauche);
 		this.lblRole = new JLabel("Comptable");
 		
@@ -104,8 +111,6 @@ public class Panel_Mon_Profil extends JPanel{
 		this.add(this.lblAdresse1,gc);
 		gc.gridx++;
 		this.add(this.lblAdresse, gc);
-		gc.gridx++;
-		this.add(this.lblCp, gc);
 		
 		gc.gridx = 0;
 		gc.gridy++;
