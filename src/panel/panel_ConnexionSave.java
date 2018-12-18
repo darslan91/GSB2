@@ -41,6 +41,7 @@ public class panel_ConnexionSave extends JPanel{
 		/* DECLARATIONS */
 			//Labels
 		this.lblMessage = new JLabel("Connexion Comptable");
+		this.lblMessage.setSize(5, 10);
 		this.lblLogin = new JLabel("Login : ");
 		this.lblMdp = new JLabel("Password : ");
 		this.lblErreur = new JLabel(" ");
@@ -59,7 +60,7 @@ public class panel_ConnexionSave extends JPanel{
 		this.btnSeConnecter.addActionListener(new ActionConnexion(this.vue, this.lblErreur, this.jtfLogin, this.jpfMdp, 1));
 		this.btnNePlusRester = new JButton("Ne plus retenir");
 		this.btnNePlusRester.addActionListener(new ActionNePlusRester(this.vue, 0));
-		this.btnExit = new JButton("Exit");
+		this.btnExit = new JButton("      Exit      ");
 		this.btnExit.addActionListener(new ActionExit(this.vue));
 		
 		/* AJOUTER AU PANEL */
@@ -71,7 +72,7 @@ public class panel_ConnexionSave extends JPanel{
 			//Message
 		gc.gridx = 0;
 		gc.gridy = 0;
-		gc.insets = new Insets(0,0,10,0);
+		gc.insets = new Insets(0,0,20,0);
 		this.add(this.lblMessage, gc);
 		
 			//Login
@@ -125,6 +126,7 @@ public class panel_ConnexionSave extends JPanel{
 		/* DECLARATIONS */
 			//Labels
 		this.lblMessage = new JLabel("Connexion Comptable");
+		this.lblMessage.setSize(15, 20);
 		this.lblLogin = new JLabel("Login : ");
 		this.lblMdp = new JLabel("Password : ");
 		this.lblErreur = new JLabel(" ");
@@ -138,7 +140,7 @@ public class panel_ConnexionSave extends JPanel{
 		this.btnSeConnecter.addActionListener(new ActionConnexion(this.vue, this.lblErreur, this.jtfLogin, this.jpfMdp));
 		this.btnNePlusRester = new JButton("Ne plus retenir");
 		this.btnNePlusRester.addActionListener(new ActionNePlusRester(this.vue, 0));
-		this.btnExit = new JButton("Exit");
+		this.btnExit = new JButton("      Exit      ");
 		this.btnExit.addActionListener(new ActionExit(this.vue));
 		
 		/* AJOUTER AU PANEL */
@@ -150,7 +152,7 @@ public class panel_ConnexionSave extends JPanel{
 			//Message
 		gc.gridx = 0;
 		gc.gridy = 0;
-		gc.insets = new Insets(0,0,10,0);
+		gc.insets = new Insets(0,0,20,0);
 		this.add(this.lblMessage, gc);
 		
 			//Login

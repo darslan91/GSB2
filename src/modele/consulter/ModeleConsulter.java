@@ -36,8 +36,8 @@ public class ModeleConsulter {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//Connexion à la BDD
-		//	connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
-			connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
+			connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
+		//	connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
 		} 
 		catch (ClassNotFoundException erreur) {
 			System.out.println("Driver non chargé!" + erreur);
