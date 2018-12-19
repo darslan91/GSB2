@@ -42,9 +42,8 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		this.prenom = prenom;
 		this.nom = nom;
 		
-		
 		this.lesFF = new ArrayList<LigneFraisForfait>();
-		
+		this.lesFHF = new ArrayList<LigneFraisHorsForfait>();
 		
 		//récupération indice tableau (créer un nv tableau pour récupération)
 		//this.lesFichesFraisRembourser = ModeleConsulter.getLesFichesFraisRembourser();
@@ -112,7 +111,7 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		this.vue.setJMenuBar(new Menu(this.vue));
 		this.vue.revalidate();	*/
 		this.lesFF = ModeleConsulter.getLesFraisForfaits(this.mois, ModeleConsulter.getId(nom, prenom));
-		this.lesFHF  = ModeleConsulter.getLesFraisHorsForfaits(mois, ModeleConsulter.getId(nom, prenom));
+		this.lesFHF = ModeleConsulter.getLesFraisHorsForfaits(this.mois, ModeleConsulter.getId(nom, prenom));
 		
 		new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom)), this.lesFF, this.lesFHF);
 		
