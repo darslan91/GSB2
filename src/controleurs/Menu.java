@@ -32,7 +32,6 @@ public class Menu extends JMenuBar{
 			//consulter
 	private JMenuItem consulterFicheValide;
 	private JMenuItem consulterFicheRembourser;
-	private JMenuItem consulterFicheCloture;
 			//Profil
 	private JMenuItem monProfil;
 	private JMenuItem deconnexion;
@@ -65,8 +64,6 @@ public class Menu extends JMenuBar{
 		this.consulterFicheValide.addActionListener(new ActionConsulterFicheValide(this.vue));
 		this.consulterFicheRembourser = new JMenuItem("Fiche Remboursé");
 		this.consulterFicheRembourser.addActionListener(new ActionConsulterFicheRembourser(this.vue));
-		this.consulterFicheCloture = new JMenuItem("Fiche Cloturé");
-		this.consulterFicheCloture.addActionListener(new ActionConsulterFicheCloture(this.vue));
 				//pdfMn
 		this.afficherPDF = new JMenuItem("PDF / XML");
 		this.afficherPDF.addActionListener(new ActionConsulterPDF(this.vue));
@@ -83,7 +80,6 @@ public class Menu extends JMenuBar{
 			//Item consultation dans consulterFicheMN
 		this.consulterFicheMn.add(this.consulterFicheValide);
 		this.consulterFicheMn.add(this.consulterFicheRembourser);
-		this.consulterFicheMn.add(this.consulterFicheCloture);
 			//Item pdf dans pdfMn
 		this.pdfMn.add(this.afficherPDF);
 			//Item monprofil
