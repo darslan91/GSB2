@@ -1,5 +1,6 @@
 package panel;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -25,21 +26,16 @@ public class Vue_Detail extends JFrame{
 		this.setTitle("Fiche frais");
 		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBackground(Color.ORANGE);
 		this.etat = etat;
-		
-		/* GRIDLAYOUT */
-		//this.setLayout(new GridLayout(2, 0));
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		/* DECLARATION ET INSTANCIATION DES ELEMENTS */
 		this.panelGlobal = new JPanel();
 		this.setContentPane(new Panel_Details_Fiche(id, mois, montant, listeFF, listeFHF, this.etat));
-		//this.setContentPane(new Panel_Tableau_Element_Forfaitiser(listeFF));
 		this.getContentPane().add(this.panelGlobal);
 		this.setVisible(true);
 		
-		
 	}
 	
-
 }
