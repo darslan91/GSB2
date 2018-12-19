@@ -2,6 +2,7 @@ package panel;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 
 import javax.swing.*;
 
@@ -21,6 +22,8 @@ public class Vue extends JFrame{
 		this.setSize(1100, 700);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			//logo
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("logo.jpg"));
 		
 		/* DECLARATION */
 			//Panel
