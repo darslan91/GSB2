@@ -34,9 +34,6 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 	private int i;
 		//Boutons
 	private JButton btnConsulter;
-		//Listes
-	private JComboBox lstOrdre;
-	private JComboBox lstMois;
 	
 		//Vue
 	private Vue vue;
@@ -89,10 +86,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		
 		//Instanciation du bouton et ajout de l'action listener au btnConsulter
 		this.btnConsulter = new JButton ("Consulter");
-		//Instanciation des listes lstOrdre et Mois
-		this.lstMois = new JComboBox(/*Modele.getLesMois()*/);
-		this.lstOrdre = new JComboBox(/*Modele.getLesVisiteurs()*/);
-				
+		
 		/* AJOUT AU PANEL */
 			//Label
 		c.gridx = 0;
@@ -114,18 +108,8 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		this.add(this.btnConsulter, c);
 		
 		c.fill = GridBagConstraints.EAST;		
-			//Listes
-		c.gridx = 3;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstMois, c);
-		
-		c.gridx = 4;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstOrdre, c);
 			
-			}
+	}
 
 
 	public void focusGained(FocusEvent arg0) {
