@@ -2,10 +2,16 @@ package panel.consulter;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
+
+
+
+
 
 import javax.swing.*;
 
@@ -46,10 +52,17 @@ public class Panel_Details_Fiche extends JPanel{
 		
 		this.setBackground(Color.ORANGE);
 		/* GRID LAYOUT */
-		this.setLayout(new GridLayout(0, 1));
+		//this.setLayout(new GridLayout(0, 1));
+		Font font = new Font("Calibri", Font.BOLD,20);
+		Font fontTitre = new Font("Calibri", Font.BOLD, 40);
+		
+		/* GRID BAG LAYOUT */ 
+		this.setLayout(new GridBagLayout());
 		
 		
 		/* INSTANCIATION DES LABELS, DES TABLEAUX ET AUTRE ELEMENTS */
+		this.lblMessages = new JLabel("FICHE FRAIS", JLabel.CENTER);
+		this.lblMessages.setFont(fontTitre);
 			//Id
 		this.lblId = new JLabel ("L'id du visiteur est : " + id);
 			//Etat fiche
@@ -58,9 +71,11 @@ public class Panel_Details_Fiche extends JPanel{
 		this.lblMontantValider = new JLabel("Montant Validé : " + montant + " €");
 			//Elements forfatiser
 		this.lblElementsForfaitises = new JLabel("Eléments Forfaitiser");
+		this.lblElementsForfaitises.setFont(font);
 			//Elements hors forfait
 		this.lblElementsNonForfait = new JLabel("Eléments Hors Forfaits");
-	
+		this.lblElementsNonForfait.setFont(font);
+		
 			//Tabeleau avec les titres des colonnes 
 		String []title = {"Forfait Etape"," Coût Catégorie Véhicule", "Kilomètre", "Nuits", "Repas"};
 		data = new Object[1][5];
@@ -77,7 +92,7 @@ public class Panel_Details_Fiche extends JPanel{
 		this.table = new JTable(data, title);
 
 		this.scroll = new JScrollPane(this.table);
-		this.scroll.setPreferredSize(new Dimension(500,150));
+		this.scroll.setPreferredSize(new Dimension(700,39));
 		
 		
 			//tableau hors forfaits 
@@ -96,15 +111,46 @@ public class Panel_Details_Fiche extends JPanel{
 		
 		this.table2 = new JTable(data2, title2);
 		this.scroll2 = new JScrollPane(this.table2);
-		
+		this.scroll2.setPreferredSize(new Dimension(700,70));
 		/* AJOUT AU PANEL LES ELEMENTS */
-		this.add(this.lblId);
-		this.add(this.lblEtat);
-		this.add(this.lblMontantValider);
-		this.add(this.lblElementsForfaitises);
-		this.add(this.scroll);
-		this.add(this.lblElementsNonForfait);
-		this.add(this.scroll2);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		
+		
+		
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(3,3,3,3);
+		this.add(this.lblMessages, c);
+		
+		c.gridx = 0;
+		c.gridy = 1;
+		c.insets = new Insets(3,3,3,3);
+		this.add(this.lblId, c);
+		
+		c.gridx = 0;
+		c.gridy = 2;
+		this.add(this.lblEtat, c);
+		
+		c.gridx = 0;
+		c.gridy = 3;
+		this.add(this.lblMontantValider, c);
+		
+		c.gridx = 0;
+		c.gridy = 4;
+		this.add(this.lblElementsForfaitises, c);
+		
+		c.gridx = 0;
+		c.gridy = 5;
+		this.add(this.scroll, c);
+		
+		c.gridx = 0;
+		c.gridy = 6;
+		this.add(this.lblElementsNonForfait, c);
+		
+		c.gridx = 0;
+		c.gridy = 7;
+		this.add(this.scroll2, c);
 		
 		
 		
