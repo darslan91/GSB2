@@ -18,6 +18,6 @@ public class ActionExit implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		this.vue.dispose();
+		System.exit(0);
 	}
 }
