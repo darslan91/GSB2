@@ -89,6 +89,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		this.btnConsulter = new JButton ("Consulter");
 
 				
+		
 		/* AJOUT AU PANEL */
 			//Label
 		c.gridx = 0;
@@ -153,7 +154,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		c.gridwidth = 1;
 		this.add(this.btnConsulter, c);
 		
-<<<<<<< HEAD
+
 		c.fill = GridBagConstraints.EAST;		
 
 =======
