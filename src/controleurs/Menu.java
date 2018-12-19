@@ -32,7 +32,6 @@ public class Menu extends JMenuBar{
 			//consulter
 	private JMenuItem consulterFicheValide;
 	private JMenuItem consulterFicheRembourser;
-	private JMenuItem consulterFicheCloture;
 			//Profil
 	private JMenuItem monProfil;
 	private JMenuItem deconnexion;
@@ -81,7 +80,6 @@ public class Menu extends JMenuBar{
 			//Item consultation dans consulterFicheMN
 		this.consulterFicheMn.add(this.consulterFicheValide);
 		this.consulterFicheMn.add(this.consulterFicheRembourser);
-		this.consulterFicheMn.add(this.consulterFicheCloture);
 			//Item pdf dans pdfMn
 		this.pdfMn.add(this.afficherPDF);
 			//Item monprofil
