@@ -1,18 +1,24 @@
 package panel.consulter;
 
+import action.consulter.ActionConsulterDetailFicheRembourser;
+import action.consulter.ActionConsulterDetailFicheValidee;
 import classes.FicheFrais;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
+import panel.Vue;
 
 
-public class Panel_Fiche_Valider extends JPanel{
+
+public class Panel_Fiche_Valider extends JPanel implements FocusListener{
 	
 	/*ATTRIBUTS PRIVES */
 		//Labels
@@ -29,9 +35,13 @@ public class Panel_Fiche_Valider extends JPanel{
 	private JComboBox lstOrdre;
 	private JComboBox lstMois;
 	
+		//Autre
+	private Vue vue;
 	
 	/* CONSTRUCTEUR */
-	public Panel_Fiche_Valider(ArrayList<FicheFrais> lesFichesFraisValider){
+	public Panel_Fiche_Valider(Vue vue, ArrayList<FicheFrais> lesFichesFraisValider){
+		
+		this.vue = vue;
 		//GridBagLayout
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -66,7 +76,7 @@ public class Panel_Fiche_Valider extends JPanel{
 				
 		//Instanciation du tableau titre et des cellules dans le JTable
 		table = new JTable(data, title);
-			
+		this.table.addFocusListener(this);	
 		//Pour pouvoir defiler si trop grand nombre d'avions par exemple
 		scroll = new JScrollPane(table);
 		
@@ -108,7 +118,70 @@ public class Panel_Fiche_Valider extends JPanel{
 		c.gridwidth = 1;
 		this.add(this.lstOrdre, c);
 			
-			}	
-		}
+	}	
+	
+	
+	public void focusGained(FocusEvent arg0) {
+		
+		//Valeur de la ligne
+		int val = this.table.getSelectedRow();
+	
+		//récupération des éléments à passer dans le constructeur pour pas regénérer le tableau dans le actionConsulterDétail
+		Object nom = data[val][0];
+		Object prenom = data[val][1];
+		Object mois = data[val][2];		
+	
+		this.remove(this.btnConsulter);
+	
+		this.btnConsulter = new JButton("Consulter");
+		
+		//GridBagLayout
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;		
+		
+		/* AJOUT AU PANEL */
+			//Label
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 6;
+		c.insets = new Insets(6,6,6,6);
+		this.add(this.lblMessage, c);
+					
+			//ScrollPane
+		c.gridx = 0;
+		c.gridy = 1;
+		c.insets = new Insets(6,6,6,6);
+		this.add(this.scroll, c);
+			
+			//JButton
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 1;
+		this.add(this.btnConsulter, c);
+		
+		c.fill = GridBagConstraints.EAST;		
+			//Listes
+		c.gridx = 3;
+		c.gridy = 2;
+		c.gridwidth = 1;
+		this.add(this.lstMois, c);
+		
+		c.gridx = 4;
+		c.gridy = 2;
+		c.gridwidth = 1;
+		this.add(this.lstOrdre, c);
+		this.btnConsulter.addActionListener(new ActionConsulterDetailFicheValidee(this.vue, nom, prenom, mois));
+		
+		this.revalidate();
+	}
+
+
+	public void focusLost(FocusEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+	
+
+}
 
 

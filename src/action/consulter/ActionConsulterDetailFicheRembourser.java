@@ -113,7 +113,7 @@ public class ActionConsulterDetailFicheRembourser implements ActionListener{
 		this.lesFF = ModeleConsulter.getLesFraisForfaits(this.mois, ModeleConsulter.getId(nom, prenom));
 		this.lesFHF = ModeleConsulter.getLesFraisHorsForfaits(this.mois, ModeleConsulter.getId(nom, prenom));
 		
-		new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom)), this.lesFF, this.lesFHF);
+		new Vue_Detail(ModeleConsulter.getId(nom, prenom), mois, ModeleConsulter.getMontantValider(mois, ModeleConsulter.getId(nom, prenom)), this.lesFF, this.lesFHF, "Remboursée");
 		
 		
 		

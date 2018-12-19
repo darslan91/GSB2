@@ -14,7 +14,7 @@ import classes.FicheFrais;
 import classes.LigneFraisForfait;
 import classes.LigneFraisHorsForfait;
 
-public class Panel_Details_Fiche_Rembourser extends JPanel{
+public class Panel_Details_Fiche extends JPanel{
 	
 	/* ATTRIBUTS PRIVEES */
 		//Labels
@@ -42,7 +42,7 @@ public class Panel_Details_Fiche_Rembourser extends JPanel{
 	
 	
 	/* CONSTRUCTEURS */
-	public Panel_Details_Fiche_Rembourser(String id, Object mois, float montant, ArrayList<LigneFraisForfait> listeFF, ArrayList<LigneFraisHorsForfait> listeFHF , String etat){
+	public Panel_Details_Fiche(String id, Object mois, float montant, ArrayList<LigneFraisForfait> listeFF, ArrayList<LigneFraisHorsForfait> listeFHF , String etat){
 		
 		this.setBackground(Color.ORANGE);
 		/* GRID LAYOUT */
