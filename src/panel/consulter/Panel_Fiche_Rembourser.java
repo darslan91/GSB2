@@ -34,9 +34,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 	private int i;
 		//Boutons
 	private JButton btnConsulter;
-		//Listes
-	private JComboBox lstOrdre;
-	private JComboBox lstMois;
+	
 	
 		//Vue
 	private Vue vue;
@@ -55,11 +53,11 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		Font font = new Font("Calibri", Font.BOLD,20);
 				
 		//Label
-		this.lblMessage = new JLabel("Consultation fiche remboursées :");
+		this.lblMessage = new JLabel("Consultation fiche remboursï¿½es :");
 		this.lblMessage.setFont(font);
 				
-		//En-tête du tableau 
-		String []title = {"Nom", "Prénom", "Mois", "Montant validé", "Date modification", "Nombre de Justificatif"};
+		//En-tï¿½te du tableau 
+		String []title = {"Nom", "Prï¿½nom", "Mois", "Montant validï¿½", "Date modification", "Nombre de Justificatif"};
 				
 		//parcours de la collection lesAvions
 		data = new Object[lesFichesFraisRembourser.size()][6]; //le premier entre-crochet pour l'avion et le deuxieme pour le tableau
@@ -89,9 +87,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		
 		//Instanciation du bouton et ajout de l'action listener au btnConsulter
 		this.btnConsulter = new JButton ("Consulter");
-		//Instanciation des listes lstOrdre et Mois
-		this.lstMois = new JComboBox(/*Modele.getLesMois()*/);
-		this.lstOrdre = new JComboBox(/*Modele.getLesVisiteurs()*/);
+
 				
 		/* AJOUT AU PANEL */
 			//Label
@@ -114,18 +110,8 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		this.add(this.btnConsulter, c);
 		
 		c.fill = GridBagConstraints.EAST;		
-			//Listes
-		c.gridx = 3;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstMois, c);
-		
-		c.gridx = 4;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstOrdre, c);
 			
-			}
+	}
 
 
 	public void focusGained(FocusEvent arg0) {
@@ -133,7 +119,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 			//Valeur de la ligne
 		int val = this.table.getSelectedRow();
 		
-			//récupération des éléments à passer dans le constructeur pour pas regénérer le tableau dans le actionConsulterDétail
+			//rï¿½cupï¿½ration des ï¿½lï¿½ments ï¿½ passer dans le constructeur pour pas regï¿½nï¿½rer le tableau dans le actionConsulterDï¿½tail
 		Object nom = data[val][0];
 		Object prenom = data[val][1];
 		Object mois = data[val][2];		
@@ -167,17 +153,12 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		c.gridwidth = 1;
 		this.add(this.btnConsulter, c);
 		
+<<<<<<< HEAD
 		c.fill = GridBagConstraints.EAST;		
-			//Listes
-		c.gridx = 3;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstMois, c);
-		
-		c.gridx = 4;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstOrdre, c);
+
+=======
+		c.fill = GridBagConstraints.EAST;
+>>>>>>> 3afee4954ed41a7c45140cc1454f87b86182b955
 		this.btnConsulter.addActionListener(new ActionConsulterDetailFicheRembourser(this.vue, nom, prenom, mois));
 		
 		this.revalidate();
