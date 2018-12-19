@@ -2,6 +2,7 @@ package panel.consulter;
 
 import classes.FicheFrais;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -32,12 +33,14 @@ public class Panel_Fiche_En_Cours_De_Validation extends JPanel{
 	
 	/* CONSTRUCTEUR */
 	public Panel_Fiche_En_Cours_De_Validation(ArrayList<FicheFrais> lesFichesFraisCoursValidation){
+		this.setBackground(Color.ORANGE);
 		//GridBagLayout
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 				
 		//Police
 		Font font = new Font("Calibri", Font.BOLD,20);
+		
 				
 		//Label
 		this.lblMessage = new JLabel("Consultation fiche remboursées :");

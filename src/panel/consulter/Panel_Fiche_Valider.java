@@ -4,6 +4,7 @@ import action.consulter.ActionConsulterDetailFicheRembourser;
 import action.consulter.ActionConsulterDetailFicheValidee;
 import classes.FicheFrais;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -31,16 +32,14 @@ public class Panel_Fiche_Valider extends JPanel implements FocusListener{
 	private int i;
 		//Boutons
 	private JButton btnConsulter;
-		//Listes
-	private JComboBox lstOrdre;
-	private JComboBox lstMois;
+		
 	
 		//Autre
 	private Vue vue;
 	
 	/* CONSTRUCTEUR */
 	public Panel_Fiche_Valider(Vue vue, ArrayList<FicheFrais> lesFichesFraisValider){
-		
+		this.setBackground(Color.ORANGE);
 		this.vue = vue;
 		//GridBagLayout
 		this.setLayout(new GridBagLayout());
@@ -84,8 +83,7 @@ public class Panel_Fiche_Valider extends JPanel implements FocusListener{
 		this.btnConsulter = new JButton ("Consulter");
 		
 		//Instanciation des listes lstOrdre et Mois
-		this.lstMois = new JComboBox(/*Modele.getLesMois()*/);
-		this.lstOrdre = new JComboBox(/*Modele.getLesVisiteurs()*/);
+		
 				
 		/* AJOUT AU PANEL */
 			//Label
@@ -107,16 +105,7 @@ public class Panel_Fiche_Valider extends JPanel implements FocusListener{
 		c.gridwidth = 1;
 		this.add(this.btnConsulter, c);
 		c.fill = GridBagConstraints.EAST;		
-			//Listes
-		c.gridx = 3;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstMois, c);
-		
-		c.gridx = 4;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstOrdre, c);
+
 			
 	}	
 	
@@ -161,16 +150,7 @@ public class Panel_Fiche_Valider extends JPanel implements FocusListener{
 		this.add(this.btnConsulter, c);
 		
 		c.fill = GridBagConstraints.EAST;		
-			//Listes
-		c.gridx = 3;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstMois, c);
-		
-		c.gridx = 4;
-		c.gridy = 2;
-		c.gridwidth = 1;
-		this.add(this.lstOrdre, c);
+
 		this.btnConsulter.addActionListener(new ActionConsulterDetailFicheValidee(this.vue, nom, prenom, mois));
 		
 		this.revalidate();
