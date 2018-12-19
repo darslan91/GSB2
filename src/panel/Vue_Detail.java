@@ -2,6 +2,7 @@ package panel;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -27,6 +28,9 @@ public class Vue_Detail extends JFrame{
 		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
 		this.setBackground(Color.ORANGE);
+			//logo
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("logo.jpg"));
+		
 		this.etat = etat;
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

@@ -34,7 +34,7 @@ public class ActionConsulterDetailFicheValidee implements ActionListener{
 	
 	
 	/* ACTION PERFORMED */	
-	@Override
+	//@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
