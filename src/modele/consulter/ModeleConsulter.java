@@ -30,8 +30,8 @@ public class ModeleConsulter {
 /			- utilisateur et  (tfoulley)
 /			- mot de passe.	 (123456)
  */
-	public static void connexionBD() {
-		
+	public static boolean connexionBD() {
+		boolean result = false;
 		//Gestion des exceptions possibless 
 		try {
 			//Chargment du driver
@@ -40,6 +40,7 @@ public class ModeleConsulter {
 			//Connexion à la BDD
 	//		connexion = DriverManager.getConnection("jdbc:mysql://172.16.203.100/2018foulley", "tfoulley", "123456");
 			connexion = DriverManager.getConnection("jdbc:mysql://localhost/gsbv2", "root", "");
+			result = true;
 		} 
 		catch (ClassNotFoundException erreur) {
 			System.out.println("Driver non chargé!" + erreur);
@@ -47,6 +48,7 @@ public class ModeleConsulter {
 		catch (SQLException erreur){
 			System.out.println("La connexion à la base de données a échoué ou Erreur SQL" + erreur);
 		}
+		return result;
 	}
 	
 	
