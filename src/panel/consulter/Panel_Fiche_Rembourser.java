@@ -4,6 +4,7 @@ import action.consulter.ActionConsulterDetailFicheRembourser;
 import action.consulter.ActionConsulterFicheRembourser;
 import classes.FicheFrais;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -44,6 +45,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 	/* CONSTRUCTEUR */
 	public Panel_Fiche_Rembourser(Vue vue, ArrayList<FicheFrais> lesFichesFraisRembourser){
 		this.vue = vue;
+		this.setBackground(Color.ORANGE);
 		
 		//GridBagLayout
 		this.setLayout(new GridBagLayout());

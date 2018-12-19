@@ -1,5 +1,6 @@
 package panel.consulter;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,7 +14,7 @@ import classes.FicheFrais;
 import classes.LigneFraisForfait;
 import classes.LigneFraisHorsForfait;
 
-public class Panel_Details_Fiche_Rembourser extends JLabel{
+public class Panel_Details_Fiche_Rembourser extends JPanel{
 	
 	/* ATTRIBUTS PRIVEES */
 		//Labels
@@ -43,6 +44,7 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 	/* CONSTRUCTEURS */
 	public Panel_Details_Fiche_Rembourser(String id, Object mois, float montant, ArrayList<LigneFraisForfait> listeFF, ArrayList<LigneFraisHorsForfait> listeFHF){
 		
+		this.setBackground(Color.ORANGE);
 		/* GRID LAYOUT */
 		this.setLayout(new GridLayout(0, 1));
 		
@@ -95,7 +97,7 @@ public class Panel_Details_Fiche_Rembourser extends JLabel{
 		this.table2 = new JTable(data2, title2);
 		this.scroll2 = new JScrollPane(this.table2);
 		
-		/*AJOUT AU PANEL LES ELEMENTS */
+		/* AJOUT AU PANEL LES ELEMENTS */
 		this.add(this.lblId);
 		this.add(this.lblEtat);
 		this.add(this.lblMontantValider);
