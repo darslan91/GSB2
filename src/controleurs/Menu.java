@@ -65,8 +65,6 @@ public class Menu extends JMenuBar{
 		this.consulterFicheValide.addActionListener(new ActionConsulterFicheValide(this.vue));
 		this.consulterFicheRembourser = new JMenuItem("Fiche Remboursé");
 		this.consulterFicheRembourser.addActionListener(new ActionConsulterFicheRembourser(this.vue));
-		this.consulterFicheCloture = new JMenuItem("Fiche Cloturé");
-		this.consulterFicheCloture.addActionListener(new ActionConsulterFicheCloture(this.vue));
 				//pdfMn
 		this.afficherPDF = new JMenuItem("PDF / XML");
 		this.afficherPDF.addActionListener(new ActionConsulterPDF(this.vue));
