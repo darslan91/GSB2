@@ -32,6 +32,7 @@ public class Vue_Detail extends JFrame{
 		
 		/* DECLARATION ET INSTANCIATION DES ELEMENTS */
 		this.panelGlobal = new JPanel();
+		this.panelGlobal.setBackground(Color.ORANGE);
 		this.setContentPane(new Panel_Details_Fiche(id, mois, montant, listeFF, listeFHF, this.etat));
 		this.getContentPane().add(this.panelGlobal);
 		this.setVisible(true);
