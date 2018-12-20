@@ -57,7 +57,7 @@ public class Panel_Fiche_Rembourser extends JPanel implements FocusListener{
 		this.lblMessage.setFont(font);
 				
 		//En-tï¿½te du tableau 
-		String []title = {"Nom", "Prï¿½nom", "Mois", "Montant validï¿½", "Date modification", "Nombre de Justificatif"};
+		String []title = {"Nom", "Prénom", "Mois", "Montant validé", "Date modification", "Nombre de Justificatif"};
 				
 		//parcours de la collection lesAvions
 		data = new Object[lesFichesFraisRembourser.size()][6]; //le premier entre-crochet pour l'avion et le deuxieme pour le tableau
